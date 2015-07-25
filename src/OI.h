@@ -6,16 +6,27 @@
 class OI
 {
 private:
+	Joystick *Logitech3DPro;
+	Joystick *XBoxController;  //Trying these private IAW GearsBot example
+//	Joystick *PSController;
+// XBoxButton Declarations
+	Button *XBoxA;
+	Button *XBoxB;
+	Button *XBoxX;
+	Button *XBoxY;
+//	Button *XBoxLBump;
+//	Button *XBoxRBump;
+//	Button *XBoxBack;
+//	Button *XBoxStart;
+//	Button *XBoxLStick;
+//	Button *XBoxRStick;
+
 
 public:
-	Joystick *Logitech3DPro;
-//	Joystick *XBoxController;
-//	Joystick *PSController;
-
 	OI();
-    double ReadJoystickX();
-    double ReadJoystickY();
-    double ReadJoystickZ();
+	double ReadJoystickX();
+	double ReadJoystickY();
+	double ReadJoystickZ();
 };
 
 #endif

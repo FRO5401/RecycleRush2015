@@ -1,7 +1,9 @@
 #include "OI.h"
 #include "RobotMap.h"
-#include "Commands/JoystickMove.h" //071615 Didn't include this, despite the comment below
 //Include h files for all the commands requiring the joysticks
+#include "Commands/JoystickMove.h" 
+#include "Commands/LiftTote.h" 
+#include "Commands/LowerTote.h" 
 
 OI::OI()
 {
@@ -11,35 +13,48 @@ OI::OI()
  *Unused joysticks are commented out, no channel assigned, but left for code reuse
 ********************************/	
 	Logitech3DPro 	= new Joystick(Logitech3D_Channel); //Testing Command based architecture with H-drive from 2015
-//	XBoxController 	= new Joystick(XBoxController_Channel); //Commented Out for Froshbot - Using PS Controller
+	XBoxController 	= new Joystick(XBoxController_Channel); //Command based arch with H-Drive from 2015
 //	PSController 	= new Joystick(PSController_Channel); //Froshbot Controller
 
 /********************************
  *Button Definition Section
  *Button Defs have not been created for unused controllers
 ********************************/
-/*
+/*  PS Controller Not Used
 //PS Controller Buttons  
-//Tentatively created but completely inaccurate, need to map these buttons accurately later.  
-//Remove this ^ note when this is mapped. - KJM
-  JoystickButton*	Up		=	new JoystickButton(PSController, 1),
-				Down		=	new JoystickButton(PSController, 2),
-				Left		=	new JoystickButton(PSController, 3),
-				Right		=	new JoystickButton(PSController, 4),
-				One		=	new JoystickButton(PSController, 5),
-				Two		=	new JoystickButton(PSController, 6),
-				Three		=	new JoystickButton(PSController, 7),
-				Four		=	new JoystickButton(PSController, 8),
-				LTrig1	=	new JoystickButton(PSController, 9),
-				RTrig1	=	new JoystickButton(PSController, 10),
-				LTrig2	=	new JoystickButton(PSController, 11),
-				RTrig2	=	new JoystickButton(PSController, 12),
-				Nine		=	new JoystickButton(PSController, 13),
-				Ten		=	new JoystickButton(PSController, 14);
+  JoystickButton*	One		=	new JoystickButton(PSController, 1),
+					Two		=	new JoystickButton(PSController, 2),
+					Three	=	new JoystickButton(PSController, 3),
+					Four	=	new JoystickButton(PSController, 4),
+					LTrig1	=	new JoystickButton(PSController, 5),
+					RTrig1	=	new JoystickButton(PSController, 6),
+					LTrig2	=	new JoystickButton(PSController, 7),
+					RTrig2	=	new JoystickButton(PSController, 8),
+					Nine	=	new JoystickButton(PSController, 9),
+					Ten		=	new JoystickButton(PSController, 10);
 //End PS Controller Buttons
 */
 //Logitech 3D Pro Section
+
 //End Logitech 3D Pro Section
+
+//XBox Controller Section
+//These mappings are probably right, but not tested
+//Remove this note once mapped accurately KJM
+//Full controller mapped, unused buttons are commented both here and OI.h
+	XBoxA			= new JoystickButton(XBoxController, 1);
+	XBoxB			= new JoystickButton(XBoxController, 2);
+	XBoxX			= new JoystickButton(XBoxController, 3);
+	XBoxY			= new JoystickButton(XBoxController, 4);
+//	XBoxLBump		= new JoystickButton(XBoxController, 5);
+//	XBoxRBump		= new JoystickButton(XBoxController, 6);
+//	XBoxBack		= new JoystickButton(XBoxController, 7);
+//	XBoxStart		= new JoystickButton(XBoxController, 8);
+//	XBoxLStick		= new JoystickButton(XBoxController, 9);
+//	XBoxRStick		= new JoystickButton(XBoxController, 10);
+
+//End XBox Controller Section
+
 
 /********************************
  *Button-Command Association Section
@@ -51,6 +66,21 @@ OI::OI()
 //See https://wpilib.screenstepslive.com/s/4485/m/13810/l/241904-running-commands-on-joystick-input
 
 //End PS Controller Buttons
+
+/********************************
+ *
+ *XBox Controller Button reading section
+ *
+********************************/
+
+	XBoxY		-> WhenPressed(new LiftTote());
+	XBoxB		-> WhenPressed(new LowerTote());
+
+/********************************
+ *
+ *End ExBox Buttons
+ *
+********************************/
 
 }
 

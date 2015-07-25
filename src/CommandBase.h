@@ -3,10 +3,12 @@
 
 #include <string>
 #include "Commands/Command.h"
-#include "Subsystems/DriveBase.h"
 #include "OI.h"
 #include "WPILib.h"
 //include includes for each subsystem
+#include "Subsystems/DriveBase.h"
+#include "Subsystems/ToteLift.h"
+
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
@@ -20,6 +22,7 @@ public:
 	static void init();
 	// Create a single static instance of all of your subsystems
 	static DriveBase *drivebase;
+	static ToteLift *totelift;
 	static OI *oi;
 };
 
