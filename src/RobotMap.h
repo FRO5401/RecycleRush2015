@@ -50,6 +50,18 @@ const int ToteLiftChannel_RightRev		= 3;
 ************************************************************************************/
 
 
+/************************************************************************************
+ *4.0 Sensor Section
+************************************************************************************/
+const int Enc_Rt_A				= 0;
+const int Enc_Rt_B				= 1;
+const int Enc_Lt_A				= 2;
+const int Enc_Lt_B				= 3;
+
+/************************************************************************************
+ *End Sensors
+************************************************************************************/
+
 
 // If you are using multiple modules, make sure to define both the port
 // number and the module. For example you with a rangefinder:

@@ -20,6 +20,8 @@ public:
 	Talon *LeftDrive;
 	Talon *RightDrive;
 	Victor *HDrive;
+	Encoder *RightEnc;
+	Encoder *LeftEnc;
 
 	DriveBase();
 	void InitDefaultCommand();

@@ -1,5 +1,6 @@
 #include "JoystickMove.h"
 #include "RobotMap.h"
+#include "SmartDashboard/SmartDashboard.h"
 
 JoystickMove::JoystickMove()
 {
@@ -23,6 +24,8 @@ void JoystickMove::Execute()
 	double Left 	= Twist - Throttle;
 	double Right 	= Twist + Throttle;
 	double H		= Slew;
+	SmartDashboard::PutNumber("X-Axis", Slew);
+	SmartDashboard::PutNumber("Y-Axis", Throttle);
 	drivebase	-> Drive(Left, Right, H);
 }
 
