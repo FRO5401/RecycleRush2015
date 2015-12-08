@@ -12,7 +12,7 @@ JoystickMove::JoystickMove()
 // Called just before this Command runs the first time
 void JoystickMove::Initialize()
 {
-	drivebase->Stop();
+//	drivebase->Stop();
 }
 
 // Called repeatedly when this Command is scheduled to run
