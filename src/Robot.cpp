@@ -3,6 +3,7 @@
 #include "Commands/JoystickMove.h"
 #include "CommandBase.h"
 
+#include "Commands/IntegerChooser.h"
 #include "Commands/Backward.h"
 #include "Commands/Forward.h"
 //Include includes for each and every command
@@ -23,7 +24,7 @@ private:
 		lw = LiveWindow::GetInstance();
 		//Dashboard selected mode block
 		autoMode = new SendableChooser();//Initializes autoMode as SendableChooser, like motors = new Victors
-		autoMode->AddDefault("Default-Forward", new Forward());//Sets the default for the autoMode
+		autoMode->AddDefault("Default-IntegerChooser", new IntegerChooser());//Sets the default for the autoMode
 		autoMode->AddObject("Backward", new Backward());//Sets a alternative choice
 		SmartDashboard::PutData("Autonomous Mode", autoMode);//What???
 		//End dash select block
