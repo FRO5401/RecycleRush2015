@@ -19,9 +19,15 @@
  *Unused controllers are commented out, no channel assigned, but left for code reuse
 ********************************/
 
-const int Logitech3D_Channel		=	0;	//Commented out, no channel assigned
-const int XBoxController_Channel	=	1;	//Commented out, no channel assigned
+const int XBoxController_Channel	=	1;
+const int Logitech3D_Channel		=	2;
 //const int PSController_Channel		=	1;//Main controller for Froshbot
+
+const double deadX	=	0.1; //Sets the dead band in X, Y, Z axes, gives play to the joystick to not move unless puched past band
+const double deadY	=	0.1;
+const double deadZ	=	0.1;
+const double JoySense = 0.8; //Joystick Sensitivity
+const double JoyPrecise = 0.3;
 /************************************************************************************
  *End Joysticks
 ************************************************************************************/
@@ -57,6 +63,8 @@ const int Enc_Rt_A				= 0;
 const int Enc_Rt_B				= 1;
 const int Enc_Lt_A				= 2;
 const int Enc_Lt_B				= 3;
+//const string Enc_Rt_X			= "k4x"; //Encoding type?
+const double DPP				= 6 * 3.1415926;
 
 /************************************************************************************
  *End Sensors

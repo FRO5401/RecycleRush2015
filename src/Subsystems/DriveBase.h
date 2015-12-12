@@ -22,11 +22,13 @@ public:
 	Victor *HDrive;
 	Encoder *RightEnc;
 	Encoder *LeftEnc;
+	Preferences *RoboPrefs;
 
 	DriveBase();
 	void InitDefaultCommand();
-	void Drive(double, double, double);
+	void Drive(double, double, double, double);
 	void Stop();
+	void Reset();
 };
 
 

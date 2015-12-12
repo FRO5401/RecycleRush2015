@@ -2,6 +2,9 @@
 #include "Commands/Command.h"
 #include "Commands/JoystickMove.h"
 #include "CommandBase.h"
+#include "Commands/GreenMode.h"
+#include "Commands/RedMode.h"
+
 //Include includes for each and every command
 //OMFG It Worked!!
 class Robot: public IterativeRobot
@@ -9,12 +12,16 @@ class Robot: public IterativeRobot
 private:
 	Command *autonomousCommand;
 	LiveWindow *lw;
+	SendableChooser *autoMode;
 
 	void RobotInit()
 	{
 		CommandBase::init();
-		//autonomousCommand = new ExampleCommand();
 		lw = LiveWindow::GetInstance();
+		autoMode = new SendableChooser();
+		autoMode->AddDefault("Default-Green", new GreenMode());
+		autoMode->AddObject("Red", new RedMode());
+		SmartDashboard::PutData("Autonomous Mode", autoMode);
 	}
 	
 	void DisabledPeriodic()
@@ -24,6 +31,7 @@ private:
 
 	void AutonomousInit()
 	{
+		autonomousCommand = (Command *) autoMode->GetSelected(); //Dashboard selection command
 		if (autonomousCommand != NULL)
 			autonomousCommand->Start();
 	}
@@ -41,10 +49,12 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
+
 	}
 
 	void TeleopPeriodic()
 	{
+
 		Scheduler::GetInstance()->Run();
 	}
 

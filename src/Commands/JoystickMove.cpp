@@ -12,6 +12,7 @@ JoystickMove::JoystickMove()
 // Called just before this Command runs the first time
 void JoystickMove::Initialize()
 {
+	drivebase	-> Reset();
 //	drivebase->Stop();
 }
 
@@ -19,14 +20,27 @@ void JoystickMove::Initialize()
 void JoystickMove::Execute()
 {
 	double Slew		=	oi 	->ReadJoystickX();
+	if (Slew < deadX && Slew > (-1*deadX))
+		Slew = 0;
+
 	double Throttle	=	oi 	->ReadJoystickY();
+	if (Throttle < deadY && Throttle > (-1*deadY))
+		Throttle = 0;
 	double Twist	=	oi 	->ReadJoystickZ();
+	if (Twist < deadZ && Twist > (-1*deadZ))
+		Twist = 0;
+//	if (Logitech3DPro -> GetRawButton(Thumb))
+//	{
+//		double Sense	=	JoyPrecise;
+//	} else double Sense = JoySense;
+
 	double Left 	= Twist - Throttle;
 	double Right 	= Twist + Throttle;
 	double H		= Slew;
 	SmartDashboard::PutNumber("X-Axis", Slew);
 	SmartDashboard::PutNumber("Y-Axis", Throttle);
-	drivebase	-> Drive(Left, Right, H);
+	SmartDashboard::PutNumber("Twist", Twist);
+	drivebase	-> Drive(Left, Right, H, JoySense);//Sends the drive parameters with the default RobotMap Sensitivity, see DriveBase to override from the SmartDash
 }
 
 // Make this return true when this Command no longer needs to run execute()

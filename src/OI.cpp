@@ -35,7 +35,17 @@ OI::OI()
 //End PS Controller Buttons
 */
 //Logitech 3D Pro Section
-
+/*	  JoystickButton*	Trigger	=	new JoystickButton(Logitech3DPro, 1),
+						Thumb	=	new JoystickButton(Logitech3DPro, 2),
+						Three	=	new JoystickButton(Logitech3DPro, 3),
+						Four	=	new JoystickButton(Logitech3DPro, 4),
+						Five	=	new JoystickButton(Logitech3DPro, 5),
+						Six	=	new JoystickButton(Logitech3DPro, 6),
+						Seven	=	new JoystickButton(Logitech3DPro, 7),
+						Eight	=	new JoystickButton(Logitech3DPro, 8),
+						Nine	=	new JoystickButton(Logitech3DPro, 9),
+						Ten		=	new JoystickButton(Logitech3DPro, 10);
+*/
 //End Logitech 3D Pro Section
 
 //XBox Controller Section
@@ -60,7 +70,6 @@ OI::OI()
  *Button-Command Association Section
  *Defs have not been created for unused controllers
 ********************************/
-//Froshbot Button Commands
 
 //Code to be determined
 //See https://wpilib.screenstepslive.com/s/4485/m/13810/l/241904-running-commands-on-joystick-input
@@ -85,10 +94,17 @@ OI::OI()
 }
 
 /********************************
+ Logitech Joystick Button Section
+********************************/
+
+/********************************
+End Logitech Joystick Buttons
+********************************/
+
+/********************************
  *Logitech Joystick reading section
  *Button defs have not been created
 ********************************/
-//071615, just realized these were all pulling 0-axis.  This may cure everything.
 double OI::ReadJoystickX()
 {
 	double Slew =	Logitech3DPro	-> GetRawAxis(0);

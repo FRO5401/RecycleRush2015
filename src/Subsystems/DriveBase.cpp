@@ -10,6 +10,7 @@
 #include "DriveBase.h"
 #include "../RobotMap.h"
 #include "../Commands/JoystickMove.h"
+//#include "Preferences.h"
 
 DriveBase::DriveBase() :	Subsystem("DriveBase")
 {
@@ -18,20 +19,28 @@ DriveBase::DriveBase() :	Subsystem("DriveBase")
   HDrive		= new Victor(MotorH);
   RightEnc		= new Encoder(Enc_Rt_A,Enc_Rt_B,true,Encoder::k1X);
   LeftEnc		= new Encoder(2,3, true, Encoder::k1X);
+//  RoboPrefs		= new Preferences;
 }
   void DriveBase::InitDefaultCommand()
   {
 	  //Default function when class is first created
-		SetDefaultCommand(new JoystickMove());
-
+		LeftEnc ->Reset();
+		RightEnc ->Reset();
+		LeftEnc -> SetDistancePerPulse(DPP);
+	SetDefaultCommand(new JoystickMove());
   }
 
-void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, double HDriveDesired) //axes of joystick
+void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, double HDriveDesired, double Sensitivity) //axes of joystick
   {
-
-  LeftDrive 	-> Set(LeftDriveDesired); //passes desired state to speed controllers
-  RightDrive 	-> Set(RightDriveDesired);
-  HDrive		-> Set(HDriveDesired);
+//  RoboPrefs = Preferences::GetInstance();
+//  Sensitivity = SmartDashboard::GetNumber("JoystickSensitivity", JoySense); //Use this to debug and dial in the sensitivity on the joystick
+  SmartDashboard::PutNumber("Drive Left", LeftEnc -> Get());
+  SmartDashboard::PutNumber("Drive Right", RightEnc -> Get());
+  SmartDashboard::PutNumber("Drive Left", LeftEnc -> GetDistance());
+  SmartDashboard::PutNumber("Drive Right", RightEnc -> GetDistance());
+  LeftDrive 	-> Set(Sensitivity * LeftDriveDesired); //passes desired state to speed controllers
+  RightDrive 	-> Set(Sensitivity * RightDriveDesired);
+  HDrive		-> Set(Sensitivity * HDriveDesired);
 
   }
 
@@ -43,6 +52,18 @@ void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, double 
   HDrive		-> Set(0);
 
   }
+
+  void DriveBase::Reset()
+  {
+
+	  LeftEnc ->Reset();
+	  RightEnc ->Reset();
+	  LeftDrive		-> Set(0);
+	  RightDrive	-> Set(0);
+	  HDrive		-> Set(0);
+
+  }
+
 //}
 /*End TankDrive subsystem
  *
