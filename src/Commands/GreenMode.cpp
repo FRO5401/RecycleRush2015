@@ -34,7 +34,7 @@ void GreenMode::Execute()
 	SmartDashboard::PutNumber("X-Axis", Slew);
 	SmartDashboard::PutNumber("Y-Axis", Throttle);
 
-	drivebase	-> Drive(Left, Right, 0, JoySense);
+//	drivebase	-> Drive(Left, Right, 0, JoySense);
 	Wait(10);
 	Done = TRUE;
 }

@@ -30,17 +30,10 @@ void DriveBase::InitDefaultCommand()
 	SetDefaultCommand(new JoystickMove());
 }
 
-void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, double HDriveDesired, double Sensitivity) //axes of joystick
+void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick
 {
-//  RoboPrefs = Preferences::GetInstance();
-//  Sensitivity = SmartDashboard::GetNumber("JoystickSensitivity", JoySense); //Use this to debug and dial in the sensitivity on the joystick
-  SmartDashboard::PutNumber("Drive Left", LeftEnc -> Get());
-  SmartDashboard::PutNumber("Drive Right", RightEnc -> Get());
-  SmartDashboard::PutNumber("Drive Left", LeftEnc -> GetDistance());
-  SmartDashboard::PutNumber("Drive Right", RightEnc -> GetDistance());
-  LeftDrive 	-> Set(Sensitivity * LeftDriveDesired); //passes desired state to speed controllers
-  RightDrive 	-> Set(Sensitivity * RightDriveDesired);
-  HDrive		-> Set(Sensitivity * HDriveDesired);
+	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
+	        RightDrive         -> Set(RightDriveDesired);
 
 }
 

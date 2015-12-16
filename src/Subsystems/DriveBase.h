@@ -26,7 +26,7 @@ public:
 
 	DriveBase();
 	void InitDefaultCommand();
-	void Drive(double, double, double, double);
+	void Drive(double, double);
 	void Stop();
 	void Reset();
 	void PrecisionMode(double, double, double);

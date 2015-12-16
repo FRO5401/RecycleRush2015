@@ -34,7 +34,7 @@ void RedMode::Execute()
 	SmartDashboard::PutNumber("X-Axis", Slew);
 	SmartDashboard::PutNumber("Y-Axis", Throttle);
 
-	drivebase	-> Drive(Left, Right, 0, JoySense);
+//	drivebase	-> Drive(Left, Right, 0, JoySense);
 	Wait(10);
 }
 
@@ -47,7 +47,7 @@ bool RedMode::IsFinished()
 // Called once after isFinished returns true
 void RedMode::End()
 {
-	drivebase	-> Drive(0, 0, 0, 0);
+	drivebase	-> Stop();
 }
 
 // Called when another command which requires one or more of the same
