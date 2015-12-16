@@ -122,3 +122,9 @@ double OI::ReadJoystickZ()
 	double Twist =	Logitech3DPro	-> GetRawAxis(2);
 	return Twist;
 }
+
+double OI::GetRawButton2()
+{
+	double PrecisionModeOn = Logitech3DPro->GetRawButton(2);
+	return PrecisionModeOn;
+}

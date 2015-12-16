@@ -29,6 +29,7 @@ public:
 	void Drive(double, double, double, double);
 	void Stop();
 	void Reset();
+	void PrecisionMode(double, double, double);
 };
 
 

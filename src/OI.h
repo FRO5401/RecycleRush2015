@@ -27,6 +27,7 @@ public:
 	double ReadJoystickX();
 	double ReadJoystickY();
 	double ReadJoystickZ();
+	double GetRawButton2();
 };
 
 #endif

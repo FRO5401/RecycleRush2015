@@ -40,7 +40,13 @@ void JoystickMove::Execute()
 	SmartDashboard::PutNumber("X-Axis", Slew);
 	SmartDashboard::PutNumber("Y-Axis", Throttle);
 	SmartDashboard::PutNumber("Twist", Twist);
+
+	double PrecisionMode = oi	->GetRawButton2();
+	if(PrecisionMode == 1){
+		drivebase->PrecisionMode(Left, Right, H);
+	}else{
 	drivebase	-> Drive(Left, Right, H, JoySense);//Sends the drive parameters with the default RobotMap Sensitivity, see DriveBase to override from the SmartDash
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
