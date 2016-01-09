@@ -1,5 +1,6 @@
 #include "JoystickMove.h"
 #include "RobotMap.h"
+#include "SmartDashboard/SmartDashboard.h"
 
 JoystickMove::JoystickMove()
 {
@@ -11,7 +12,7 @@ JoystickMove::JoystickMove()
 // Called just before this Command runs the first time
 void JoystickMove::Initialize()
 {
-	drivebase->Stop();
+//	drivebase->Stop();
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -23,6 +24,8 @@ void JoystickMove::Execute()
 	double Left 	= Twist - Throttle;
 	double Right 	= Twist + Throttle;
 	double H		= Slew;
+	SmartDashboard::PutNumber("X-Axis", Slew);
+	SmartDashboard::PutNumber("Y-Axis", Throttle);
 	drivebase	-> Drive(Left, Right, H);
 }
 

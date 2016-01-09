@@ -16,6 +16,8 @@ DriveBase::DriveBase() :	Subsystem("DriveBase")
   LeftDrive 	= new Talon(MotorLeft);
   RightDrive 	= new Talon(MotorRight);
   HDrive		= new Victor(MotorH);
+  RightEnc		= new Encoder(Enc_Rt_A,Enc_Rt_B,true,Encoder::k1X);
+  LeftEnc		= new Encoder(2,3, true, Encoder::k1X);
 }
   void DriveBase::InitDefaultCommand()
   {
