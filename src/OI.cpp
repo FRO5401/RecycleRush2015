@@ -1,7 +1,7 @@
+#include <Commands/JoystickMoveSkid.h>
 #include "OI.h"
 #include "RobotMap.h"
 //Include h files for all the commands requiring the joysticks
-#include "Commands/JoystickMove.h" 
 #include "Commands/LiftTote.h" 
 #include "Commands/LowerTote.h" 
 
