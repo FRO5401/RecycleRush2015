@@ -22,8 +22,8 @@ void XboxMoveSkid::Execute()
 	double Slew                =        oi         ->ReadJoystickX();
 	double Throttle        =        oi         ->ReadJoystickY();
 	double Twist        =        oi         ->ReadJoystickZ();
-	double V = (100-abs(Throttle)) * (Twist/100) + Twist;
-	double W = (100-abs(Twist)) * (Throttle/100) + Throttle;
+	double V = (100-abs(Throttle)) * (Slew/100) + Slew;
+	double W = (100-abs(Slew)) * (Throttle/100) + Throttle;
 	double Right = (V-W)/2;
 	double Left = (V+W)/2;
 	drivebase        -> Drive(Left, Right);
