@@ -1,7 +1,7 @@
 #include "OI.h"
 #include "RobotMap.h"
 //Include h files for all the commands requiring the joysticks
-#include "Commands/JoystickMove.h" 
+#include "Commands/XboxMoveSkid.h"
 #include "Commands/LiftTote.h" 
 #include "Commands/LowerTote.h" 
 
@@ -89,6 +89,7 @@ OI::OI()
  *Button defs have not been created
 ********************************/
 //071615, just realized these were all pulling 0-axis.  This may cure everything.
+/*
 double OI::ReadJoystickX()
 {
 	double Slew =	Logitech3DPro	-> GetRawAxis(0);
@@ -104,5 +105,29 @@ double OI::ReadJoystickY()
 double OI::ReadJoystickZ()
 {
 	double Twist =	Logitech3DPro	-> GetRawAxis(2);
+	return Twist;
+}
+*/
+
+/********************************
+ *Xbox Joystick reading section
+ *Button defs have not been created
+********************************/
+
+double OI::ReadJoystickX()
+{
+	double Slew =	XBoxController	-> GetRawAxis(0);
+	return Slew;
+}
+
+double OI::ReadJoystickY()
+{
+	double Throttle =	XBoxController	-> GetRawAxis(1);
+	return Throttle;
+}
+
+double OI::ReadJoystickZ()
+{
+	double Twist =	XBoxController	-> GetRawAxis(2);
 	return Twist;
 }

@@ -5,7 +5,7 @@
  *      Author: KJM
  * H-drive for 2015 Recycle Rush Robot, test case for Command Arch
  *
- *
+ * NOTE THIS IS EXCLUDED FROM BUILD
  */
 #include <Commands/JoystickMoveSkid.h>
 #include "DriveBase.h"
