@@ -47,7 +47,7 @@ OI::OI()
 	XBoxX			= new JoystickButton(XBoxController, 3);
 	XBoxY			= new JoystickButton(XBoxController, 4);
 //	XBoxLBump		= new JoystickButton(XBoxController, 5);
-//	XBoxRBump		= new JoystickButton(XBoxController, 6);
+	XBoxRBump		= new JoystickButton(XBoxController, 6);
 //	XBoxBack		= new JoystickButton(XBoxController, 7);
 //	XBoxStart		= new JoystickButton(XBoxController, 8);
 //	XBoxLStick		= new JoystickButton(XBoxController, 9);
@@ -75,6 +75,7 @@ OI::OI()
 
 	XBoxY		-> WhenPressed(new LiftTote());
 	XBoxB		-> WhenPressed(new LowerTote());
+	//XBoxRBump   -> WhenPressed();
 
 /********************************
  *
@@ -130,4 +131,8 @@ double OI::ReadJoystickZ()
 {
 	double Twist =	XBoxController	-> GetRawAxis(2);
 	return Twist;
+}
+
+Button* OI::ReadRightBumper(){
+	return XBoxRBump;
 }
