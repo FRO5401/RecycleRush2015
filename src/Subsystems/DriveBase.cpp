@@ -7,7 +7,7 @@
  *
  *
  */
-#include <Commands/XboxMoveSkid.h>
+#include "../Commands/MOH_GTADrive.h"
 #include "DriveBase.h"
 #include "../RobotMap.h"
 //#include "Preferences.h"
@@ -27,7 +27,7 @@ void DriveBase::InitDefaultCommand()
 		LeftEnc ->Reset();
 		RightEnc ->Reset();
 //		LeftEnc -> SetDistancePerPulse(DPP);
-	SetDefaultCommand(new XboxMoveSkid());
+	SetDefaultCommand(new MOH_GTADrive());
 }
 
 void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick

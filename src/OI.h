@@ -6,9 +6,10 @@
 class OI
 {
 private:
-	Joystick *Logitech3DPro;
+//	Joystick *Logitech3DPro;
 	Joystick *XBoxController;  //Trying these private IAW GearsBot example
 //	Joystick *PSController;
+	Joystick *MOHController;
 // XBoxButton Declarations
 	Button *XBoxA;
 	Button *XBoxB;
@@ -21,12 +22,26 @@ private:
 //	Button *XBoxLStick;
 //	Button *XBoxRStick;
 
+// XBoxButton Declarations
+//	Button *MOHA;
+//	Button *MOHB;
+//	Button *MOHX;
+//	Button *MOHY;
+//	Button *MOHLBump;
+//	Button *MOHRBump;
+	Button *MOHLTrig;
+	Button *MOHRTrig;
+//	Button *MOHLStick;
+//	Button *MOHRStick;
+
 
 public:
 	OI();
 	double ReadJoystickX();
 	double ReadJoystickY();
 	double ReadJoystickZ();
+	double GetLeftTrigger();
+	double GetRightTrigger();
 	Button* ReadRightBumper();
 };
 

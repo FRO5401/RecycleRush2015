@@ -19,9 +19,11 @@
  *Unused controllers are commented out, no channel assigned, but left for code reuse
 ********************************/
 
-const int Logitech3D_Channel		=	0;	//Commented out, no channel assigned
+//const int Logitech3D_Channel		=	0;	//Commented out, no channel assigned
 const int XBoxController_Channel	=	1;	//Commented out, no channel assigned
-//const int PSController_Channel		=	1;//Main controller for Froshbot
+//const int PSController_Channel		=	2;//Main controller for Froshbot
+const int MOHController_Channel	=	3;	//Commented out, no channel assigned
+
 /************************************************************************************
  *End Joysticks
 ************************************************************************************/
