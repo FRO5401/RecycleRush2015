@@ -89,7 +89,7 @@ OI::OI()
  *Logitech Joystick reading section
  *Button defs have not been created
 ********************************/
-//071615, just realized these were all pulling 0-axis.  This may cure everything.
+//Joystick commented out for XBox control
 /*
 double OI::ReadJoystickX()
 {
@@ -111,13 +111,13 @@ double OI::ReadJoystickZ()
 */
 
 /********************************
- *Xbox Joystick reading section
+ *Xbox Thumbstick reading section
  *Button defs have not been created
 ********************************/
 
 double OI::ReadJoystickX()
 {
-	double Slew =	XBoxController	-> GetRawAxis(0);
+	double Slew =		XBoxController	-> GetRawAxis(0);
 	return Slew;
 }
 
@@ -127,26 +127,28 @@ double OI::ReadJoystickY()
 	return Throttle;
 }
 
-double OI::ReadJoystickZ()
+double OI::ReadJoystickZ() //This is not used in XBox Skid Steering, but is left to avoid errors on function calls
 {
-	double Twist =	XBoxController	-> GetRawAxis(2);
+	double Twist =		XBoxController	-> GetRawAxis(2);
 	return Twist;
 }
 
-double OI::GetTrigger()
+/* Commented out, this is for GTA drive
+double OI::GetTrigger() 
 {
 	double Throttle = XBoxController	->	GetRawAxis(2);
 	return Throttle;
 }
+*/
 
-bool OI::GetPrecision()
+bool OI::GetPrecision() //Polls the left bumper to determine whether to drive in precision mode.  LBumper_ID is set in RobotMap
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
+	bool ButtonReader = 	XBoxController	->	GetRawButton(LBumper_ID);
 	return ButtonReader;
-}
+} //Might be simplified to remove ButtonReader variable and just return the function
 
-bool OI::GetBrake()
+bool OI::GetBrake() //Polls the right bumper to determine whether to brake the robot.  RBumper_ID is set in RobotMap
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
+	bool ButtonReader = 	XBoxController	->	GetRawButton(RBumper_ID);
 	return ButtonReader;
-}
+}//Might be simplified to remove ButtonReader variable and just return the function
