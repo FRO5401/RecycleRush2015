@@ -21,19 +21,28 @@ void XboxMoveSkid::Execute()
 {
 	double Slew                =        oi         ->ReadJoystickX();
 	double Throttle        =        oi         ->ReadJoystickY();
-	double Twist        =        oi         ->ReadJoystickZ();
-	double Right,Left;
+//	double Twist        =        oi         ->ReadJoystickZ();
+	bool 	Precision	=	oi	->	GetPrecision();
+	bool 	Brake		=	oi	->	GetBrake();
+	double Right,Left, Sensitivity;
 
-	if(!oi->ReadRightBumper()){
+	if (Precision) { //Sets drive precision based on RobotMap and Precision Mode
+		Sensitivity	=	Drive_Sensitivity_Precise;
+	} else {
+		Sensitivity	=	Drive_Sensitivity_Default;
+	}
+
+	if(Brake){
+		Right = 0;
+		Left = 0;
+		} else {
 			double V = (100-abs(Throttle)) * (Slew/100) + Slew;
 			double W = (100-abs(Slew)) * (Throttle/100) + Throttle;
-			Right = (V-W)/2;
-			Left = (V+W)/2;
-		} else {
-			Right = 0;
-			Left = 0;
+			Right = Sensitivity * ((V-W)/2);
+			Left = Sensitivity * ((V+W)/2);
 		}
-			drivebase        -> Drive(Left, Right);
+
+	drivebase        -> Drive(Left, Right);
 }
 
 // Make this return true when this Command no longer needs to run execute()

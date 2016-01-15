@@ -15,7 +15,7 @@ private:
 	Button *XBoxX;
 	Button *XBoxY;
 //	Button *XBoxLBump;
-	Button *XBoxRBump;
+//	Button *XBoxRBump;
 //	Button *XBoxBack;
 //	Button *XBoxStart;
 //	Button *XBoxLStick;
@@ -27,7 +27,9 @@ public:
 	double ReadJoystickX();
 	double ReadJoystickY();
 	double ReadJoystickZ();
-	Button* ReadRightBumper();
+	double GetTrigger();
+	bool GetPrecision();
+	bool GetBrake();
 };
 
 #endif
