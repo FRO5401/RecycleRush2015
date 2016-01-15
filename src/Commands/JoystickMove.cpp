@@ -34,8 +34,8 @@ void JoystickMove::Execute()
 //		double Sense	=	JoyPrecise;
 //	} else double Sense = JoySense;
 
-	double Left 	= Twist - Throttle;
-	double Right 	= Twist + Throttle;
+	double Left 	= Twist + Throttle;
+	double Right 	= Twist - Throttle;
 	double H		= Slew;
 	SmartDashboard::PutNumber("X-Axis", Slew);
 	SmartDashboard::PutNumber("Y-Axis", Throttle);
