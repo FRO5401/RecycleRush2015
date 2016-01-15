@@ -150,21 +150,27 @@ double OI::ReadJoystickZ()
 	return Twist;
 }
 
-double OI::GetTrigger()
+double OI::GetLeftTrigger()
 {
 	double Throttle = XBoxController	->	GetRawAxis(2);
 	return Throttle;
 }
 
+double OI::GetRightTrigger()
+{
+	double Throttle = XBoxController	->	GetRawAxis(3);
+	return Throttle;
+}
+
 bool OI::GetPrecision()
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
+	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
 	return ButtonReader;
 }
 
 bool OI::GetBrake()
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
+	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
 	return ButtonReader;
 }
 

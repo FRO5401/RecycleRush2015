@@ -40,7 +40,8 @@ public:
 	double ReadJoystickX();
 	double ReadJoystickY();
 	double ReadJoystickZ();
-	double GetTrigger();
+	double GetLeftTrigger();
+	double GetRightTrigger();
 	bool GetPrecision();
 	bool GetBrake();
 

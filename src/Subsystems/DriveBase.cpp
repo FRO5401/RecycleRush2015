@@ -30,7 +30,7 @@ void DriveBase::InitDefaultCommand()
 	SetDefaultCommand(new XBox_GTADrive());
 }
 
-void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, bool Precision, bool Brake) //axes of joystick
+void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick
 {
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
