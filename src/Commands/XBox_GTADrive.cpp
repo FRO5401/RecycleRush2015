@@ -26,7 +26,7 @@ void XBox_GTADrive::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void XBox_GTADrive::Execute()
 {
-	double 	Twist       =	oi	->	ReadJoystickX();
+	double 	Slew       =	oi	->	ReadJoystickX();
 	double 	Throttle 	=	oi	->	GetRightTrigger();
 	double 	Reverse 	=	oi	->	GetLeftTrigger();
 	bool 	Precision	=	oi	->	GetPrecision();
@@ -42,12 +42,12 @@ void XBox_GTADrive::Execute()
 	if (Brake) {
 		Right = 0;
 		Left = 0;
-	} else if (Twist > 0){									//Positive X axis means right turn
-	Right = (Throttle - Reverse) * (1 - Twist) * Sensitivity;
-	Left = (Throttle-Reverse) * (1) * Sensitivity;
+	} else if (Slew > 0){									//Positive X axis means right turn
+	Left = (Throttle - Reverse) * (1 - Slew) * Sensitivity;
+	Right = (Throttle-Reverse) * (1) * Sensitivity;
 	} else {
-		Right = (Throttle-Reverse) * (1) * Sensitivity;
-		Left = (Throttle-Reverse) * (1 + Twist) * Sensitivity;
+		Left = (Throttle-Reverse) * (1) * Sensitivity;
+		Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
 	}
 
 	drivebase        -> Drive(Left, Right);

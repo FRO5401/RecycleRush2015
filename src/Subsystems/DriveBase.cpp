@@ -32,9 +32,10 @@ void DriveBase::InitDefaultCommand()
 
 void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick
 {
+	LeftDriveDesired = -1 * LeftDriveDesired;	//Corrects for reversed motor
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
-
+	        HDrive	->	Set(0); //GTA Drive does not use H Drive
 }
 
 void DriveBase::Stop()
