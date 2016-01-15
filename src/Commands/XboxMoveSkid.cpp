@@ -19,9 +19,9 @@ void XboxMoveSkid::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void XboxMoveSkid::Execute()
 {
-	double Slew                =        oi         ->ReadJoystickX();
-	double Throttle        =        oi         ->ReadJoystickY();
-//	double Twist        =        oi         ->ReadJoystickZ();
+	double Slew		=        oi	->	ReadJoystickX();
+	double Throttle		=        oi	->	ReadJoystickY();
+//	double Twist        =        oi         ->ReadJoystickZ(); //Twist does not exist on XBox controller
 	bool 	Precision	=	oi	->	GetPrecision();
 	bool 	Brake		=	oi	->	GetBrake();
 	double Right,Left, Sensitivity;
@@ -32,7 +32,7 @@ void XboxMoveSkid::Execute()
 		Sensitivity	=	Drive_Sensitivity_Default;
 	}
 
-	if(Brake){
+	if(Brake){ //First check is brake to stop robot for safety
 		Right = 0;
 		Left = 0;
 		} else {
@@ -46,6 +46,7 @@ void XboxMoveSkid::Execute()
 }
 
 // Make this return true when this Command no longer needs to run execute()
+// Driving command will run infinitely and never Finish
 bool XboxMoveSkid::IsFinished()
 {
 	return false;
