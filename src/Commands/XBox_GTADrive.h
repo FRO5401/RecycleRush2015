@@ -5,8 +5,8 @@
  *      Author: AFRO
  */
 
-#ifndef SRC_COMMANDS_MOH_GTADRIVE_H_
-#define SRC_COMMANDS_MOH_GTADRIVE_H_
+#ifndef SRC_COMMANDS_XBOX_GTADRIVE_H_
+#define SRC_COMMANDS_XBOX_GTADRIVE_H_
 
 #ifndef MOH_GTADrive_H
 #define MOH_GTADrive_H
@@ -14,10 +14,10 @@
 #include "../CommandBase.h"
 #include "WPILib.h"
 
-class MOH_GTADrive: public CommandBase
+class XBox_GTADrive: public CommandBase
 {
 public:
-	MOH_GTADrive();
+	XBox_GTADrive();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -29,4 +29,4 @@ public:
 
 
 
-#endif /* SRC_COMMANDS_MOH_GTADRIVE_H_ */
+#endif /* SRC_COMMANDS_XBOX_GTADRIVE_H_ */

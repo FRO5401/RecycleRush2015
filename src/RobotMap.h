@@ -22,7 +22,13 @@
 //const int Logitech3D_Channel		=	0;	//Commented out, no channel assigned
 const int XBoxController_Channel	=	1;	//Commented out, no channel assigned
 //const int PSController_Channel		=	2;//Main controller for Froshbot
-const int MOHController_Channel	=	3;	//Commented out, no channel assigned
+//const int MOHController_Channel	=	3;	//Commented out, no channel assigned
+
+const double Drive_Sensitivity_Default	=	1;
+const double Drive_Sensitivity_Precise	=	0.2;
+
+const int LBumper_ID	=	6;
+const int RBumper_ID	=	7;
 
 /************************************************************************************
  *End Joysticks

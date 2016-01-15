@@ -40,9 +40,10 @@ public:
 	double ReadJoystickX();
 	double ReadJoystickY();
 	double ReadJoystickZ();
-	double GetLeftTrigger();
-	double GetRightTrigger();
-	Button* ReadRightBumper();
+	double GetTrigger();
+	bool GetPrecision();
+	bool GetBrake();
+
 };
 
 #endif

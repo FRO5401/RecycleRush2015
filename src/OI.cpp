@@ -1,7 +1,7 @@
+#include <Commands/XBox_GTADrive.h>
 #include "OI.h"
 #include "RobotMap.h"
 //Include h files for all the commands requiring the joysticks
-#include "Commands/MOH_GTADrive.h"
 #include "Commands/LiftTote.h" 
 #include "Commands/LowerTote.h" 
 
@@ -15,7 +15,7 @@ OI::OI()
 //	Logitech3DPro 	= new Joystick(Logitech3D_Channel); //Testing Command based architecture with H-drive from 2015
 	XBoxController 	= new Joystick(XBoxController_Channel); //Command based arch with H-Drive from 2015
 //	PSController 	= new Joystick(PSController_Channel); //Froshbot Controller
-	MOHController	= new Joystick(MOHController_Channel);
+//	MOHController	= new Joystick(MOHController_Channel);
 
 /********************************
  *Button Definition Section
@@ -48,7 +48,7 @@ OI::OI()
 	XBoxX			= new JoystickButton(XBoxController, 3);
 	XBoxY			= new JoystickButton(XBoxController, 4);
 //	XBoxLBump		= new JoystickButton(XBoxController, 5);
-	XBoxRBump		= new JoystickButton(XBoxController, 6);
+//	XBoxRBump		= new JoystickButton(XBoxController, 6);
 //	XBoxBack		= new JoystickButton(XBoxController, 7);
 //	XBoxStart		= new JoystickButton(XBoxController, 8);
 //	XBoxLStick		= new JoystickButton(XBoxController, 9);
@@ -66,8 +66,8 @@ OI::OI()
 //	MOHY			= new JoystickButton(MOHController, 4);
 //	MOHLBump		= new JoystickButton(MOHController, 5);
 //	MOHRBump		= new JoystickButton(MOHController, 6);
-	MOHLTrig			= new JoystickButton(MOHController, 7);
-	MOHRTrig		= new JoystickButton(MOHController, 8);
+//	MOHLTrig			= new JoystickButton(MOHController, 7);
+//	MOHRTrig		= new JoystickButton(MOHController, 8);
 //	MOHLStick		= new JoystickButton(MOHController, 9);
 //	MOHRStick		= new JoystickButton(MOHController, 10);
 
@@ -150,19 +150,21 @@ double OI::ReadJoystickZ()
 	return Twist;
 }
 
-double OI::GetLeftTrigger()
+double OI::GetTrigger()
 {
-	double LeftThrottle = GetRawButton(7);
-	return LeftThrottle;
+	double Throttle = XBoxController	->	GetRawAxis(2);
+	return Throttle;
 }
 
-double OI::GetRightTrigger()
+bool OI::GetPrecision()
 {
-	double RightThrottle = GetRawButton
-	return MOHRTrig;
+	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
+	return ButtonReader;
 }
-/*
-Button* OI::ReadRightBumper(){
-	return XBoxRBump;
+
+bool OI::GetBrake()
+{
+	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
+	return ButtonReader;
 }
-*/
+

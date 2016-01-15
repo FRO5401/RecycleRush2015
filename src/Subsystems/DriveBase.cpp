@@ -7,7 +7,7 @@
  *
  *
  */
-#include "../Commands/MOH_GTADrive.h"
+#include <Commands/XBox_GTADrive.h>
 #include "DriveBase.h"
 #include "../RobotMap.h"
 //#include "Preferences.h"
@@ -27,10 +27,10 @@ void DriveBase::InitDefaultCommand()
 		LeftEnc ->Reset();
 		RightEnc ->Reset();
 //		LeftEnc -> SetDistancePerPulse(DPP);
-	SetDefaultCommand(new MOH_GTADrive());
+	SetDefaultCommand(new XBox_GTADrive());
 }
 
-void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick
+void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, bool Precision, bool Brake) //axes of joystick
 {
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
