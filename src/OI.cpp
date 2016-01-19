@@ -90,7 +90,7 @@ OI::OI()
  *
 ********************************/
 
-	XBoxY		-> WhenPressed(new LiftTote());
+//	XBoxY		-> WhenPressed(new LiftTote());
 	XBoxB		-> WhenPressed(new LowerTote());
 	//XBoxRBump   -> WhenPressed();
 
