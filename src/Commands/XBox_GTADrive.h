@@ -5,11 +5,11 @@
  *      Author: AFRO
  */
 
-#ifndef SRC_COMMANDS_XBOX_GTADRIVE_H_
-#define SRC_COMMANDS_XBOX_GTADRIVE_H_
+//#ifndef SRC_COMMANDS_XBOX_GTADRIVE_H_
+//#define SRC_COMMANDS_XBOX_GTADRIVE_H_
 
-#ifndef MOH_GTADrive_H
-#define MOH_GTADrive_H
+#ifndef XBox_GTADrive_H
+#define XBox_GTADrive_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"
@@ -29,4 +29,4 @@ public:
 
 
 
-#endif /* SRC_COMMANDS_XBOX_GTADRIVE_H_ */
+//#endif /* SRC_COMMANDS_XBOX_GTADRIVE_H_ */
