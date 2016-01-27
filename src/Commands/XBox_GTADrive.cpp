@@ -32,6 +32,7 @@ void XBox_GTADrive::Execute()
 	bool 	Precision	=	oi	->	GetPrecision();
 	bool 	Brake		=	oi	->	GetBrake();
 	double Right,Left, Sensitivity;
+	bool turn = false;
 
 	if (Precision) { //Sets drive precision based on RobotMap and Precision Mode
 		Sensitivity	=	Drive_Sensitivity_Precise;
@@ -39,16 +40,30 @@ void XBox_GTADrive::Execute()
 		Sensitivity	=	Drive_Sensitivity_Default;
 	}
 
+	if (Throttle == 0 && Reverse == 0)
+		turn = true;
+
 	if (Brake) {
 		Right = 0;
 		Left = 0;
 	} else if (Slew > 0){									//Positive X axis means right turn
-	Left = (Throttle - Reverse) * (1 - Slew) * Sensitivity;
-	Right = (Throttle-Reverse) * (1) * Sensitivity;
+		if (turn){ //Turn right
+			Left = -1 * Sensitivity;
+			Right = 1 * Sensitivity;
+		} else{
+			Left = (Throttle - Reverse) * (1 - Slew) * Sensitivity;
+			Right = (Throttle-Reverse) * (1) * Sensitivity;
+		}
 	} else {
-		Left = (Throttle-Reverse) * (1) * Sensitivity;
-		Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
+		if (turn){ //Turn left
+			Left = 1 * Sensitivity;
+			Right = -1 * Sensitivity;
+		} else {
+			Left = (Throttle-Reverse) * (1) * Sensitivity;
+			Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
+		}
 	}
+
 
 	drivebase        -> Drive(Left, Right);
 }
