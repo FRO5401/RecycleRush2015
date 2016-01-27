@@ -40,25 +40,25 @@ void XBox_GTADrive::Execute()
 		Sensitivity	=	Drive_Sensitivity_Default;
 	}
 
-	if (Throttle == 0 && Reverse == 0)
-		turn = true;
+	//if (Throttle == 0 && Reverse == 0)
+		//turn = true;
 
 	if (Brake) {
 		Right = 0;
 		Left = 0;
 	} else if (Slew > 0){									//Positive X axis means right turn
-		if (turn){ //Turn right
-			Left = -1 * Sensitivity;
-			Right = 1 * Sensitivity;
-		} else{
+//		if (turn){ //Turn right
+//			Left = -1 * (Sensitivity * Slew);
+//			Right = 1 * (Sensitivity * Slew);
+		//} else{
 			Left = (Throttle - Reverse) * (1 - Slew) * Sensitivity;
 			Right = (Throttle-Reverse) * (1) * Sensitivity;
 		}
 	} else {
-		if (turn){ //Turn left
-			Left = 1 * Sensitivity;
-			Right = -1 * Sensitivity;
-		} else {
+//		if (turn){ //Turn left
+//			Left = 1 * (Sensitivity * Slew);
+//			Right = -1 * (Sensitivity * Slew);
+//		} else {
 			Left = (Throttle-Reverse) * (1) * Sensitivity;
 			Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
 		}
