@@ -1,0 +1,107 @@
+18:29:13 **** Rebuild of configuration Debug for project FroshBot ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Commands\\XBox_GTADrive.o" "..\\src\\Commands\\XBox_GTADrive.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Subsystems\\ToteLift.o" "..\\src\\Subsystems\\ToteLift.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Commands\\LowerTote.o" "..\\src\\Commands\\LowerTote.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Commands\\LiftTote.o" "..\\src\\Commands\\LiftTote.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Commands\\LockTarget.o" "..\\src\\Commands\\LockTarget.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\CommandBase.o" "..\\src\\CommandBase.cpp" 
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\TEMP/wpilib/cpp/current/include" "-IC:\\Temp\\RecycleRush2015\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Subsystems\\WateryTart.o" "..\\src\\Subsystems\\WateryTart.cpp" 
+..\src\Subsystems\WateryTart.cpp: In member function 'void WateryTart::Search()':
+..\src\Subsystems\WateryTart.cpp:110:40: error: no matching function for call to 'WateryTart::SendToDashboard(Image*&, int&)'
+  SendToDashboard(binaryFrame, imaqError);
+                                        ^
+..\src\Subsystems\WateryTart.cpp:110:40: note: candidate is:
+In file included from ..\src\Subsystems\WateryTart.cpp:9:0:
+..\src\Subsystems\WateryTart.h:28:7: note: void WateryTart::SendToDashboard(Image, int)
+  void SendToDashboard(Image, int);
+       ^
+..\src\Subsystems\WateryTart.h:28:7: note:   no known conversion for argument 1 from 'Image* {aka Image_struct*}' to 'Image'
+..\src\Subsystems\WateryTart.cpp:127:89: error: 'ParticleReport' has no member named 'PercentAreaToImageArea'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_AREA_BY_IMAGE_AREA, &(par.PercentAreaToImageArea));
+                                                                                         ^
+..\src\Subsystems\WateryTart.cpp:128:75: error: 'ParticleReport' has no member named 'Area'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_AREA, &(par.Area));
+                                                                           ^
+..\src\Subsystems\WateryTart.cpp:129:88: error: 'ParticleReport' has no member named 'BoundingRectTop'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_BOUNDING_RECT_TOP, &(par.BoundingRectTop));
+                                                                                        ^
+..\src\Subsystems\WateryTart.cpp:130:89: error: 'ParticleReport' has no member named 'BoundingRectLeft'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_BOUNDING_RECT_LEFT, &(par.BoundingRectLeft));
+                                                                                         ^
+..\src\Subsystems\WateryTart.cpp:131:91: error: 'ParticleReport' has no member named 'BoundingRectBottom'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_BOUNDING_RECT_BOTTOM, &(par.BoundingRectBottom));
+                                                                                           ^
+..\src\Subsystems\WateryTart.cpp:132:90: error: 'ParticleReport' has no member named 'BoundingRectRight'
+    imaqMeasureParticle(binaryFrame, particleIndex, 0, IMAQ_MT_BOUNDING_RECT_RIGHT, &(par.BoundingRectRight));
+                                                                                          ^
+..\src\Subsystems\WateryTart.cpp:148:85: error: no matching function for call to 'WateryTart::computeDistance(Image*&, __gnu_cxx::__alloc_traits<std::allocator<ParticleReport_struct> >::value_type&)'
+   SmartDashboard::PutNumber("Distance", computeDistance(binaryFrame, particles.at(0)));
+                                                                                     ^
+..\src\Subsystems\WateryTart.cpp:148:85: note: candidate is:
+In file included from ..\src\Subsystems\WateryTart.cpp:9:0:
+..\src\Subsystems\WateryTart.h:33:9: note: double WateryTart::computeDistance(Image, ParticleReport)
+  double computeDistance (Image, ParticleReport);
+         ^
+..\src\Subsystems\WateryTart.h:33:9: note:   no known conversion for argument 1 from 'Image* {aka Image_struct*}' to 'Image'
+..\src\Subsystems\WateryTart.cpp: In function 'bool CompareParticleSizes(ParticleReport, ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:194:20: error: 'ParticleReport' has no member named 'PercentAreaToImageArea'
+   return particle1.PercentAreaToImageArea > particle2.PercentAreaToImageArea;
+                    ^
+..\src\Subsystems\WateryTart.cpp:194:55: error: 'ParticleReport' has no member named 'PercentAreaToImageArea'
+   return particle1.PercentAreaToImageArea > particle2.PercentAreaToImageArea;
+                                                       ^
+..\src\Subsystems\WateryTart.cpp: In function 'double AreaScore(ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:209:33: error: 'ParticleReport' has no member named 'BoundingRectBottom'
+   double boundingArea = (report.BoundingRectBottom - report.BoundingRectTop) * (report.BoundingRectRight - report.BoundingRectLeft);
+                                 ^
+..\src\Subsystems\WateryTart.cpp:209:61: error: 'ParticleReport' has no member named 'BoundingRectTop'
+   double boundingArea = (report.BoundingRectBottom - report.BoundingRectTop) * (report.BoundingRectRight - report.BoundingRectLeft);
+                                                             ^
+..\src\Subsystems\WateryTart.cpp:209:88: error: 'ParticleReport' has no member named 'BoundingRectRight'
+   double boundingArea = (report.BoundingRectBottom - report.BoundingRectTop) * (report.BoundingRectRight - report.BoundingRectLeft);
+                                                                                        ^
+..\src\Subsystems\WateryTart.cpp:209:115: error: 'ParticleReport' has no member named 'BoundingRectLeft'
+   double boundingArea = (report.BoundingRectBottom - report.BoundingRectTop) * (report.BoundingRectRight - report.BoundingRectLeft);
+                                                                                                                   ^
+..\src\Subsystems\WateryTart.cpp:211:38: error: 'ParticleReport' has no member named 'Area'
+   return ratioToScore((49/24)*report.Area/boundingArea);
+                                      ^
+..\src\Subsystems\WateryTart.cpp: In function 'double AspectScore(ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:219:32: error: 'ParticleReport' has no member named 'BoundingRectRight'
+   return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
+                                ^
+..\src\Subsystems\WateryTart.cpp:219:57: error: 'ParticleReport' has no member named 'BoundingRectLeft'
+   return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
+                                                         ^
+..\src\Subsystems\WateryTart.cpp:219:83: error: 'ParticleReport' has no member named 'BoundingRectBottom'
+   return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
+                                                                                   ^
+..\src\Subsystems\WateryTart.cpp:219:109: error: 'ParticleReport' has no member named 'BoundingRectTop'
+   return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
+                                                                                                             ^
+..\src\Subsystems\WateryTart.cpp: In function 'double computeDistance(Image*, ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:236:31: error: 'ParticleReport' has no member named 'BoundingRectRight'
+   normalizedWidth = 2*(report.BoundingRectRight - report.BoundingRectLeft)/xRes;
+                               ^
+..\src\Subsystems\WateryTart.cpp:236:58: error: 'ParticleReport' has no member named 'BoundingRectLeft'
+   normalizedWidth = 2*(report.BoundingRectRight - report.BoundingRectLeft)/xRes;
+                                                          ^
+..\src\Subsystems\WateryTart.cpp: In function 'bool CompareParticleSizes(ParticleReport, ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:195:2: warning: control reaches end of non-void function [-Wreturn-type]
+  }
+  ^
+..\src\Subsystems\WateryTart.cpp: In function 'double AreaScore(ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:212:2: warning: control reaches end of non-void function [-Wreturn-type]
+  }
+  ^
+..\src\Subsystems\WateryTart.cpp: In function 'double AspectScore(ParticleReport)':
+..\src\Subsystems\WateryTart.cpp:220:2: warning: control reaches end of non-void function [-Wreturn-type]
+  }
+  ^
+..\src\Subsystems\WateryTart.cpp: At global scope:
+..\src\Subsystems\WateryTart.cpp:191:14: warning: 'bool CompareParticleSizes(ParticleReport, ParticleReport)' defined but not used [-Wunused-function]
+  static bool CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)
+              ^
+
+18:29:22 Build Finished (took 8s.652ms)
