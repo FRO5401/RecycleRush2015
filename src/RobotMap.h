@@ -27,8 +27,9 @@ const int XBoxController_Channel	=	1;	//Commented out, no channel assigned
 const double Drive_Sensitivity_Default	=	1;
 const double Drive_Sensitivity_Precise	=	0.2;
 
-const int LBumper_ID	=	6;
-const int RBumper_ID	=	7;
+const int LBumper_ID	=	5;
+const int RBumper_ID	=	6;
+const int XBoxXButton   =   3;
 
 /************************************************************************************
  *End Joysticks

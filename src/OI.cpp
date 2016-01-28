@@ -164,13 +164,18 @@ double OI::GetRightTrigger()
 
 bool OI::GetPrecision()
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
+	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
 	return ButtonReader;
 }
 
 bool OI::GetBrake()
 {
-	bool ButtonReader = XBoxController	->	GetRawButton(LBumper_ID);
+	bool ButtonReader = XBoxController	->	GetRawButton(RBumper_ID);
+	return ButtonReader;
+}
+
+bool OI::GetButtonX(){
+	bool ButtonReader = XBoxController -> GetRawButton(XBoxXButton);
 	return ButtonReader;
 }
 

@@ -44,6 +44,7 @@ public:
 	double GetRightTrigger();
 	bool GetPrecision();
 	bool GetBrake();
+	bool GetButtonX();
 
 };
 
