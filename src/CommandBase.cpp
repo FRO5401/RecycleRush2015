@@ -9,6 +9,8 @@
 DriveBase* CommandBase::drivebase = NULL;
 ToteLift* CommandBase::totelift = NULL;
 OI* CommandBase::oi = NULL;
+WateryTart*	CommandBase::waterytart		= NULL;
+
 
 CommandBase::CommandBase(char const *name) :
 		Command(name)
@@ -27,6 +29,7 @@ void CommandBase::init()
 	// line should be repeated for each subsystem in the project.
 	drivebase = new DriveBase();
 	totelift = new ToteLift();
+	waterytart	= new WateryTart();
 
 	oi = new OI();
 }

@@ -9,13 +9,13 @@ private:
 //	Joystick *Logitech3DPro;
 	Joystick *XBoxController;  //Trying these private IAW GearsBot example
 //	Joystick *PSController;
-	Joystick *MOHController;
+//	Joystick *MOHController;
 // XBoxButton Declarations
 	Button *XBoxA;
 	Button *XBoxB;
 	Button *XBoxX;
 	Button *XBoxY;
-//	Button *XBoxLBump;
+	Button *XBoxLBump;
 	Button *XBoxRBump;
 //	Button *XBoxBack;
 //	Button *XBoxStart;
@@ -29,8 +29,8 @@ private:
 //	Button *MOHY;
 //	Button *MOHLBump;
 //	Button *MOHRBump;
-	Button *MOHLTrig;
-	Button *MOHRTrig;
+//	Button *MOHLTrig;
+//	Button *MOHRTrig;
 //	Button *MOHLStick;
 //	Button *MOHRStick;
 
@@ -39,7 +39,7 @@ public:
 	OI();
 	double ReadJoystickX();
 	double ReadJoystickY();
-	double ReadJoystickZ();
+//	double ReadJoystickZ();
 	double GetLeftTrigger();
 	double GetRightTrigger();
 	bool GetPrecision();

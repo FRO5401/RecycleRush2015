@@ -8,6 +8,8 @@
 //include includes for each subsystem
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/ToteLift.h"
+#include "Subsystems/WateryTart.h"
+
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -24,6 +26,8 @@ public:
 	static DriveBase *drivebase;
 	static ToteLift *totelift;
 	static OI *oi;
+	static WateryTart 	*waterytart;
+
 };
 
 #endif

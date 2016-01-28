@@ -4,6 +4,7 @@
 //Include h files for all the commands requiring the joysticks
 #include "Commands/LiftTote.h" 
 #include "Commands/LowerTote.h" 
+#include "Commands/LockTarget.h"
 
 OI::OI()
 {
@@ -47,8 +48,8 @@ OI::OI()
 	XBoxB			= new JoystickButton(XBoxController, 2);
 	XBoxX			= new JoystickButton(XBoxController, 3);
 	XBoxY			= new JoystickButton(XBoxController, 4);
-//	XBoxLBump		= new JoystickButton(XBoxController, 5);
-//	XBoxRBump		= new JoystickButton(XBoxController, 6);
+	XBoxLBump		= new JoystickButton(XBoxController, 5);
+	XBoxRBump		= new JoystickButton(XBoxController, 6);
 //	XBoxBack		= new JoystickButton(XBoxController, 7);
 //	XBoxStart		= new JoystickButton(XBoxController, 8);
 //	XBoxLStick		= new JoystickButton(XBoxController, 9);
@@ -91,6 +92,7 @@ OI::OI()
 ********************************/
 
 //	XBoxY		-> WhenPressed(new LiftTote());
+	XBoxA		-> WhenPressed(new LockTarget());
 	XBoxB		-> WhenPressed(new LowerTote());
 	//XBoxRBump   -> WhenPressed();
 
@@ -106,7 +108,6 @@ OI::OI()
  *Logitech Joystick reading section
  *Button defs have not been created
 ********************************/
-//071615, just realized these were all pulling 0-axis.  This may cure everything.
 /*
 double OI::ReadJoystickX()
 {
@@ -143,13 +144,13 @@ double OI::ReadJoystickY()
 	double Throttle =	XBoxController	-> GetRawAxis(1);
 	return Throttle;
 }
-
+/*
 double OI::ReadJoystickZ()
 {
 	double Twist =	XBoxController	-> GetRawAxis(2);
 	return Twist;
 }
-
+*/
 double OI::GetLeftTrigger()
 {
 	double Throttle = XBoxController	->	GetRawAxis(2);

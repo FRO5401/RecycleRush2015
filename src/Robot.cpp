@@ -1,4 +1,5 @@
 #include <Commands/XBox_GTADrive.h>
+#include "Commands/LockTarget.h"
 #include "WPILib.h"
 #include "Commands/Command.h"
 #include "CommandBase.h"
