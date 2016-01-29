@@ -9,7 +9,7 @@
 #include "WateryTart.h"
 #include "../RobotMap.h"
 #include "Commands/LockTarget.h"
-//#include "SmartDashboard/SmartDashboard.h"
+#include "SmartDashboard/SmartDashboard.h"
 //#include "LiveWindow/LiveWindow.h"
 
 //#include <opencv2/opencv.hpp>
