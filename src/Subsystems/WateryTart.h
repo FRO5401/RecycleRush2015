@@ -30,7 +30,7 @@ public:
 	double ratioToScore(double);
 	double AreaScore(ParticleReport);
 	double AspectScore(ParticleReport);
-	double computeDistance (Image*, ParticleReport);
+	double computeDistance (Image, ParticleReport);
 
 };
 

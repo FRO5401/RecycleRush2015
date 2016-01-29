@@ -230,7 +230,7 @@ void WateryTart::SendToDashboard(Image *image, int error)
 	 * @param report The Particle Analysis Report for the particle
 	 * @return The estimated distance to the target in feet.
 	 */
-	double WateryTart::computeDistance (Image *image, ParticleReport report) {
+	double computeDistance (Image *image, ParticleReport report) {
 		double normalizedWidth, targetWidth;
 		int xRes, yRes;
 
