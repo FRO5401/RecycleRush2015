@@ -17,7 +17,7 @@
 //#include <ctime>
 #include <vector>
 
-/*
+
 //A structure to hold measurements of a particle
 	struct ParticleReportX {
 		double PercentAreaToImageArea;
@@ -27,7 +27,7 @@
 		double BoundingRectRight;
 		double BoundingRectBottom;
 	};
-*/
+
 	//Structure to represent the scores for the various tests used for target identification
 	struct Scores {
 		double Area;
@@ -63,6 +63,7 @@ void WateryTart::InitDefaultCommand()
 {
 	//SetDefaultCommand(new LockTarget());
 }
+
 
 void WateryTart::Search()
   {
@@ -107,7 +108,7 @@ void WateryTart::Search()
 	SmartDashboard::PutNumber("Masked particles", numParticles);
 
 	//Send masked image to dashboard to assist in tweaking mask.
-	SendToDashboard(binaryFrame, imaqError);
+	WateryTart::SendToDashboard(binaryFrame, imaqError);
 
 	//filter out small particles
 	float areaMin = SmartDashboard::GetNumber("Area min %", AREA_MINIMUM);
@@ -117,6 +118,7 @@ void WateryTart::Search()
 	//Send particle count after filtering to dashboard
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
 	SmartDashboard::PutNumber("Filtered particles", numParticles);
+
 
 	if(numParticles > 0) {
 		//Measure particles and sort by particle size
@@ -178,7 +180,7 @@ void WateryTart::Manual()
 
   }
 
-	void SendToDashboard(Image *image, int error)
+void WateryTart::SendToDashboard(Image *image, int error)
 	{
 		if(error < ERR_SUCCESS) {
 			DriverStation::ReportError("Send To Dashboard error: " + std::to_string((long)imaqError) + "\n");
