@@ -25,7 +25,7 @@ public:
 	void Manual();
 	void Stop();
 	void Reset();
-	void SendToDashboard(Image, int);
+	void SendToDashboard(Image*, int);
 	static bool CompareParticleSizes(ParticleReport, ParticleReport);
 	double ratioToScore(double);
 	double AreaScore(ParticleReport);
