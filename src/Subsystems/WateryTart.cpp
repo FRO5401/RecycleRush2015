@@ -100,7 +100,7 @@ void WateryTart::Search()
 	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_HSV, &RING_HUE_RANGE, &RING_SAT_RANGE, &RING_VAL_RANGE);
 //Replaces the SendtoDashboard function without error handling
 	CameraServer::GetInstance()->SetImage(binaryFrame);
-
+Wait(0.1);
 	/*COMMENT EVERYTHING
 
 	//Send particle count to dashboard

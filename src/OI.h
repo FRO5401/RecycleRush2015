@@ -8,7 +8,7 @@ class OI
 private:
 //	Joystick *Logitech3DPro;
 	Joystick *XBoxController;  //Trying these private IAW GearsBot example
-//	Joystick *PSController;
+	Joystick *PSController;
 //	Joystick *MOHController;
 // XBoxButton Declarations
 	Button *XBoxA;
@@ -21,7 +21,7 @@ private:
 //	Button *XBoxStart;
 //	Button *XBoxLStick;
 //	Button *XBoxRStick;
-
+	Button *One;
 // XBoxButton Declarations
 //	Button *MOHA;
 //	Button *MOHB;

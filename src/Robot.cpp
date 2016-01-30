@@ -16,8 +16,8 @@ private:
 		CommandBase::init();
 		//autonomousCommand = new ExampleCommand();
 		lw = LiveWindow::GetInstance();
-		CameraServer::GetInstance() -> SetQuality(50);
-		CameraServer::GetInstance() -> StartAutomaticCapture("cam0");
+//		CameraServer::GetInstance() -> SetQuality(50);
+//		CameraServer::GetInstance() -> StartAutomaticCapture("cam0");
 	}
 	
 
@@ -28,6 +28,7 @@ private:
 
 	void AutonomousInit()
 	{
+		autonomousCommand = new LockTarget();
 		if (autonomousCommand != NULL)
 			autonomousCommand->Start();
 	}
@@ -45,6 +46,7 @@ private:
 		// this line or comment it out.
 		if (autonomousCommand != NULL)
 			autonomousCommand->Cancel();
+//		new LockTarget();
 	}
 
 	void TeleopPeriodic()
