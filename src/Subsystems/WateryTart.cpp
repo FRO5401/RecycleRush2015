@@ -35,10 +35,9 @@
 	};
 
 	//Images
-	Image *frame;
-	Image *binaryFrame;
+	Image* frame;
+	Image* binaryFrame;
 	int imaqError;
-
 	//Constants
 	Range RING_HUE_RANGE = {101, 64};	//Default hue range for ring light
 	Range RING_SAT_RANGE = {88, 255};	//Default saturation range for ring light
@@ -64,18 +63,17 @@ void WateryTart::InitDefaultCommand()
 	//SetDefaultCommand(new LockTarget());
 }
 
+/* INTENT: Search function
+ * Upon the press of a button, a command will invoke this function to check the image for the scoring U, and evaluate whether we have a shooting vector
+ * It will return a rumble to the controller and splash a green box on the dashboard
+ * Ideally, this will take place on an on board raspberry pi or arduino board, but that is version 2.0
+ */
 void WateryTart::Search()
   {
-	/* INTENT:
-	 * Upon the press of a button, a command will invoke this function to check the image for the scoring U, and evaluate whether we have a shooting vector
-	 * It will return a rumble to the controller and splash a green box on the dashboard
-	 * Ideally, this will take place on an on board raspberry pi or arduino board, but that is version 2.0
-	 */
 
     // create images
 	frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
 	binaryFrame = imaqCreateImage(IMAQ_IMAGE_U8, 0);
-
 	//Put default values to SmartDashboard so fields will appear
 	SmartDashboard::PutNumber("Tote hue min", RING_HUE_RANGE.minValue);
 	SmartDashboard::PutNumber("Tote hue max", RING_HUE_RANGE.maxValue);
@@ -87,9 +85,9 @@ void WateryTart::Search()
 
 	//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
 	//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
+	//Two different pictures here, just referring to one or the other based on commented line
 	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Goalimage20.png", NULL, NULL);
 //			imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Toteimage20.jpg", NULL, NULL);
-
 	//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
 	RING_HUE_RANGE.minValue = SmartDashboard::GetNumber("Tote hue min", RING_HUE_RANGE.minValue);
 	RING_HUE_RANGE.maxValue = SmartDashboard::GetNumber("Tote hue max", RING_HUE_RANGE.maxValue);
@@ -100,6 +98,10 @@ void WateryTart::Search()
 
 	//Threshold the image looking for ring light color
 	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_HSV, &RING_HUE_RANGE, &RING_SAT_RANGE, &RING_VAL_RANGE);
+//Replaces the SendtoDashboard function without error handling
+	CameraServer::GetInstance()->SetImage(binaryFrame);
+
+	/*COMMENT EVERYTHING
 
 	//Send particle count to dashboard
 	int numParticles = 0;
@@ -150,8 +152,9 @@ void WateryTart::Search()
 		SmartDashboard::PutBoolean("IsTarget", false);
 	}
 
-
+*/
   }
+
 
 void WateryTart::Manual()
   {
@@ -177,8 +180,8 @@ void WateryTart::Manual()
  */
 
   }
-
-	void SendToDashboard(Image *image, int error)
+/*  COMMENT EVERYTHING
+	void WateryTart::SendToDashboard(Image *image, int error)
 	{
 		if(error < ERR_SUCCESS) {
 			DriverStation::ReportError("Send To Dashboard error: " + std::to_string((long)imaqError) + "\n");
@@ -188,7 +191,7 @@ void WateryTart::Manual()
 	}
 
 	//Comparator function for sorting particles. Returns true if particle 1 is larger
-	static bool CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)
+	static bool WateryTart::CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)
 	{
 		//we want descending sort order
 		return particle1.PercentAreaToImageArea > particle2.PercentAreaToImageArea;
@@ -198,13 +201,14 @@ void WateryTart::Manual()
 	 * Converts a ratio with ideal value of 1 to a score. The resulting function is piecewise
 	 * linear going from (0,0) to (1,100) to (2,0) and is 0 for all inputs outside the range 0-2
 	 */
-	double ratioToScore(double ratio)
+  /* COMMENT EVERYTHING
+	double WateryTart::ratioToScore(double ratio)
 	{
 		return (fmax(0, fmin(100*(1-fabs(1-ratio)), 100)));
 	}
 
 
-	double AreaScore(ParticleReport report)
+	double WateryTart::AreaScore(ParticleReport report)
 	{
 		double boundingArea = (report.BoundingRectBottom - report.BoundingRectTop) * (report.BoundingRectRight - report.BoundingRectLeft);
 		//Tape is 7" edge so 49" bounding rect. With 2" wide tape it covers 24" of the rect.
@@ -214,7 +218,8 @@ void WateryTart::Manual()
 	/**
 	 * Method to score if the aspect ratio of the particle appears to match the retro-reflective target. Target is 7"x7" so aspect should be 1
 	 */
-	double AspectScore(ParticleReport report)
+  /* COMMENT EVERYTHING
+	double WateryTart::AspectScore(ParticleReport report)
 	{
 		return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
 	}
@@ -228,7 +233,8 @@ void WateryTart::Manual()
 	 * @param report The Particle Analysis Report for the particle
 	 * @return The estimated distance to the target in feet.
 	 */
-	double computeDistance (Image *image, ParticleReport report) {
+  /* COMMENT EVERYTHING
+	double WateryTart::computeDistance (Image *image, ParticleReport report) {
 		double normalizedWidth, targetWidth;
 		int xRes, yRes;
 
@@ -239,4 +245,4 @@ void WateryTart::Manual()
 
 		return  targetWidth/(normalizedWidth*12*tan(VIEW_ANGLE*M_PI/(180*2)));
 	}
-//};
+//};*/
