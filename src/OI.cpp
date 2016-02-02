@@ -176,3 +176,9 @@ bool OI::GetBrake()
 	return ButtonReader;
 }
 
+bool OI::GetPSButtonTwo()
+{
+	bool ButtonReader = PSController	->	GetRawButton(2);
+	return ButtonReader;
+}
+

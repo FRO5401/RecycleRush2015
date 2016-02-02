@@ -28,11 +28,15 @@ LockTarget::LockTarget()
 	bool LockTarget::IsFinished()
 {
 //	return Lock;
-		return false;
+		bool ButtonTwo = oi	-> GetPSButtonTwo();
+		return ButtonTwo;
+//		return false;
 }
 
 	void LockTarget::End(){
-//		new Launch();
+
+		waterytart	->	Stop();
+
 	}
 
 	void LockTarget::Interrupted(){};

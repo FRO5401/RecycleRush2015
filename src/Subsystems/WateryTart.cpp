@@ -38,6 +38,7 @@
 	Image* frame;
 	Image* binaryFrame;
 	int imaqError;
+	IMAQdxSession session;
 	//Constants
 	Range RING_HUE_RANGE = {101, 64};	//Default hue range for ring light
 	Range RING_SAT_RANGE = {88, 255};	//Default saturation range for ring light
@@ -55,7 +56,16 @@ WateryTart::WateryTart() :
 		Subsystem("WateryTart")
 {
 //Motor and sensor declarations here
-
+//	MainCam	=	new USBCamera("cam0");
+//	MainCam	-> CameraServer::GetInstance();
+	imaqError = IMAQdxOpenCamera("cam0", IMAQdxCameraControlModeController, &session);
+	if(imaqError != IMAQdxErrorSuccess) {
+		DriverStation::ReportError("IMAQdxOpenCamera error: " + std::to_string((long)imaqError) + "\n");
+	}
+	imaqError = IMAQdxConfigureGrab(session);
+	if(imaqError != IMAQdxErrorSuccess) {
+		DriverStation::ReportError("IMAQdxConfigureGrab error: " + std::to_string((long)imaqError) + "\n");
+	}
 }
 
 void WateryTart::InitDefaultCommand()
@@ -85,9 +95,17 @@ void WateryTart::Search()
 
 	//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
 	//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
-	//Two different pictures here, just referring to one or the other based on commented line
-	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Goalimage20.png", NULL, NULL);
-//			imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Toteimage20.jpg", NULL, NULL);
+	//Two different pictures here, just referring to one or the other based on commented line, leave commented and uncomment section below to use camera
+//	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Goalimage20.png", NULL, NULL);
+//	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Toteimage20.jpg", NULL, NULL);
+// This starts acquisition from the camera, uncomment once calibrated with the files above.
+	IMAQdxStartAcquisition(session);
+
+	IMAQdxGrab(session, frame, true, NULL); //Takes the image from "session" and stores it in "frame"
+	if(imaqError != IMAQdxErrorSuccess) {
+		DriverStation::ReportError("IMAQdxGrab error: " + std::to_string((long)imaqError) + "\n");
+	}
+
 	//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
 	RING_HUE_RANGE.minValue = SmartDashboard::GetNumber("Tote hue min", RING_HUE_RANGE.minValue);
 	RING_HUE_RANGE.maxValue = SmartDashboard::GetNumber("Tote hue max", RING_HUE_RANGE.maxValue);
@@ -99,17 +117,13 @@ void WateryTart::Search()
 	//Threshold the image looking for ring light color
 	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_HSV, &RING_HUE_RANGE, &RING_SAT_RANGE, &RING_VAL_RANGE);
 //Replaces the SendtoDashboard function without error handling
-	CameraServer::GetInstance()->SetImage(binaryFrame);
-Wait(0.1);
-	/*COMMENT EVERYTHING
-
+	CameraServer::GetInstance()->SetImage(binaryFrame); //Send masked image to dashboard to assist in tweaking mask.
+Wait(2); //Part of test code to cycle between the filtered image and the color image
+CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
 	//Send particle count to dashboard
 	int numParticles = 0;
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
 	SmartDashboard::PutNumber("Masked particles", numParticles);
-
-	//Send masked image to dashboard to assist in tweaking mask.
-	SendToDashboard(binaryFrame, imaqError);
 
 	//filter out small particles
 	float areaMin = SmartDashboard::GetNumber("Area min %", AREA_MINIMUM);
@@ -119,6 +133,7 @@ Wait(0.1);
 	//Send particle count after filtering to dashboard
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
 	SmartDashboard::PutNumber("Filtered particles", numParticles);
+	/*COMMENT EVERYTHING
 
 	if(numParticles > 0) {
 		//Measure particles and sort by particle size
@@ -169,6 +184,7 @@ void WateryTart::Manual()
 /*
  * Not sure this will be needed but reserving a space for it so that we can clear image, or reinitialize variables, or anything associated with stopping
  */
+		IMAQdxStopAcquisition(session);
 
   }
 
