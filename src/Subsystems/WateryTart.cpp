@@ -40,9 +40,6 @@
 	int imaqError;
 	IMAQdxSession session;
 	//Constants
-	Range RING_HUE_RANGE = {101, 64};	//Default hue range for ring light
-	Range RING_SAT_RANGE = {88, 255};	//Default saturation range for ring light
-	Range RING_VAL_RANGE = {134, 255};	//Default value range for ring light
 	double AREA_MINIMUM = 0.5; //Default Area minimum for particle as a percentage of total image area
 	double LONG_RATIO = 2.22; //Tote long side = 26.9 / Tote height = 12.1 = 2.22
 	double SHORT_RATIO = 1.4; //Tote short side = 16.9 / Tote height = 12.1 = 1.4
@@ -78,19 +75,19 @@ void WateryTart::InitDefaultCommand()
  * It will return a rumble to the controller and splash a green box on the dashboard
  * Ideally, this will take place on an on board raspberry pi or arduino board, but that is version 2.0
  */
-void WateryTart::Search()
+void WateryTart::Search(Range Red, Range Green, Range Blue)
   {
 
     // create images
 	frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
 	binaryFrame = imaqCreateImage(IMAQ_IMAGE_U8, 0);
 	//Put default values to SmartDashboard so fields will appear
-	SmartDashboard::PutNumber("Tote hue min", RING_HUE_RANGE.minValue);
-	SmartDashboard::PutNumber("Tote hue max", RING_HUE_RANGE.maxValue);
-	SmartDashboard::PutNumber("Tote sat min", RING_SAT_RANGE.minValue);
-	SmartDashboard::PutNumber("Tote sat max", RING_SAT_RANGE.maxValue);
-	SmartDashboard::PutNumber("Tote val min", RING_VAL_RANGE.minValue);
-	SmartDashboard::PutNumber("Tote val max", RING_VAL_RANGE.maxValue);
+	SmartDashboard::PutNumber("Tote hue min", Red.minValue);
+	SmartDashboard::PutNumber("Tote hue max", Red.maxValue);
+	SmartDashboard::PutNumber("Tote sat min", Green.minValue);
+	SmartDashboard::PutNumber("Tote sat max", Green.maxValue);
+	SmartDashboard::PutNumber("Tote val min", Blue.minValue);
+	SmartDashboard::PutNumber("Tote val max", Blue.maxValue);
 	SmartDashboard::PutNumber("Area min %", AREA_MINIMUM);
 
 	//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
@@ -104,22 +101,17 @@ void WateryTart::Search()
 	IMAQdxGrab(session, frame, true, NULL); //Takes the image from "session" and stores it in "frame"
 	if(imaqError != IMAQdxErrorSuccess) {
 		DriverStation::ReportError("IMAQdxGrab error: " + std::to_string((long)imaqError) + "\n");
+		SmartDashboard::PutNumber("Error Code", imaqError);
 	}
 
-	//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
-	RING_HUE_RANGE.minValue = SmartDashboard::GetNumber("Tote hue min", RING_HUE_RANGE.minValue);
-	RING_HUE_RANGE.maxValue = SmartDashboard::GetNumber("Tote hue max", RING_HUE_RANGE.maxValue);
-	RING_SAT_RANGE.minValue = SmartDashboard::GetNumber("Tote sat min", RING_SAT_RANGE.minValue);
-	RING_SAT_RANGE.maxValue = SmartDashboard::GetNumber("Tote sat max", RING_SAT_RANGE.maxValue);
-	RING_VAL_RANGE.minValue = SmartDashboard::GetNumber("Tote val min", RING_VAL_RANGE.minValue);
-	RING_VAL_RANGE.maxValue = SmartDashboard::GetNumber("Tote val max", RING_VAL_RANGE.maxValue);
-
+	CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
 	//Threshold the image looking for ring light color
-	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_HSV, &RING_HUE_RANGE, &RING_SAT_RANGE, &RING_VAL_RANGE);
-//Replaces the SendtoDashboard function without error handling
+	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_RGB, &Red, &Green, &Blue);
+	Wait(2); //Part of test code to cycle between the filtered image and the color image
+
+	//Replaces the SendtoDashboard function without error handling
 	CameraServer::GetInstance()->SetImage(binaryFrame); //Send masked image to dashboard to assist in tweaking mask.
-Wait(2); //Part of test code to cycle between the filtered image and the color image
-CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
+
 	//Send particle count to dashboard
 	int numParticles = 0;
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
@@ -133,6 +125,7 @@ CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboar
 	//Send particle count after filtering to dashboard
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
 	SmartDashboard::PutNumber("Filtered particles", numParticles);
+
 	/*COMMENT EVERYTHING
 
 	if(numParticles > 0) {
@@ -150,6 +143,7 @@ CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboar
 			particles.push_back(par);
 		}
 		sort(particles.begin(), particles.end(), CompareParticleSizes);
+
 
 		//This example only scores the largest particle. Extending to score all particles and choosing the desired one is left as an exercise
 		//for the reader. Note that this scores and reports information about a single particle (single L shaped target). To get accurate information

@@ -7,12 +7,18 @@
 #include <Commands/LockTarget.h>
 #include "RobotMap.h"
 bool Lock;
+Range RING_HUE_RANGE = {0	, 0};	//Default hue range for ring light
+Range RING_SAT_RANGE = {250	, 255};	//Default saturation range for ring light
+Range RING_VAL_RANGE = {0	, 0};	//Default value range for ring light
 
 LockTarget::LockTarget()
 {
   Requires(waterytart);
 }
 	void LockTarget::Initialize() {
+//		Range RING_HUE_RANGE = {101, 64};	//Default hue range for ring light
+//		Range RING_SAT_RANGE = {88, 255};	//Default saturation range for ring light
+//		Range RING_VAL_RANGE = {134, 255};	//Default value range for ring light
 	};
 
 	void LockTarget::Execute(){
@@ -21,16 +27,24 @@ LockTarget::LockTarget()
  * Then it will set a bool flag Lock to indicate target lock
  * When finished, it will kick off the launch command
  */
-		waterytart	->	Search();
+		//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
+		RING_HUE_RANGE.minValue = SmartDashboard::GetNumber("Tote hue min", RING_HUE_RANGE.minValue);
+		RING_HUE_RANGE.maxValue = SmartDashboard::GetNumber("Tote hue max", RING_HUE_RANGE.maxValue);
+		RING_SAT_RANGE.minValue = SmartDashboard::GetNumber("Tote sat min", RING_SAT_RANGE.minValue);
+		RING_SAT_RANGE.maxValue = SmartDashboard::GetNumber("Tote sat max", RING_SAT_RANGE.maxValue);
+		RING_VAL_RANGE.minValue = SmartDashboard::GetNumber("Tote val min", RING_VAL_RANGE.minValue);
+		RING_VAL_RANGE.maxValue = SmartDashboard::GetNumber("Tote val max", RING_VAL_RANGE.maxValue);
+
+		waterytart	->	Search(RING_HUE_RANGE, RING_SAT_RANGE, RING_VAL_RANGE);
 
 	};
 
 	bool LockTarget::IsFinished()
 {
 //	return Lock;
-		bool ButtonTwo = oi	-> GetPSButtonTwo();
-		return ButtonTwo;
-//		return false;
+//		bool ButtonTwo = oi	-> GetPSButtonTwo();
+//		return ButtonTwo;
+		return true;
 }
 
 	void LockTarget::End(){
