@@ -75,7 +75,7 @@ void WateryTart::InitDefaultCommand()
  * It will return a rumble to the controller and splash a green box on the dashboard
  * Ideally, this will take place on an on board raspberry pi or arduino board, but that is version 2.0
  */
-void WateryTart::Search(Range Red, Range Green, Range Blue)
+void WateryTart::Search(Range Red, Range Green, Range Blue, int ParticleNumber)
   {
 
     // create images
@@ -93,24 +93,20 @@ void WateryTart::Search(Range Red, Range Green, Range Blue)
 	//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
 	//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
 	//Two different pictures here, just referring to one or the other based on commented line, leave commented and uncomment section below to use camera
-//	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Goalimage20.png", NULL, NULL);
+	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Goalimage20.png", NULL, NULL);
 //	imaqError = imaqReadFile(frame, "//home//lvuser//SampleImages//Toteimage20.jpg", NULL, NULL);
 // This starts acquisition from the camera, uncomment once calibrated with the files above.
-	IMAQdxStartAcquisition(session);
+/*	IMAQdxStartAcquisition(session);
 
 	IMAQdxGrab(session, frame, true, NULL); //Takes the image from "session" and stores it in "frame"
 	if(imaqError != IMAQdxErrorSuccess) {
 		DriverStation::ReportError("IMAQdxGrab error: " + std::to_string((long)imaqError) + "\n");
 		SmartDashboard::PutNumber("Error Code", imaqError);
 	}
-
-	CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
+*/
 	//Threshold the image looking for ring light color
 	imaqError = imaqColorThreshold(binaryFrame, frame, 255, IMAQ_RGB, &Red, &Green, &Blue);
-	Wait(2); //Part of test code to cycle between the filtered image and the color image
 
-	//Replaces the SendtoDashboard function without error handling
-	CameraServer::GetInstance()->SetImage(binaryFrame); //Send masked image to dashboard to assist in tweaking mask.
 
 	//Send particle count to dashboard
 	int numParticles = 0;
@@ -125,6 +121,18 @@ void WateryTart::Search(Range Red, Range Green, Range Blue)
 	//Send particle count after filtering to dashboard
 	imaqError = imaqCountParticles(binaryFrame, 1, &numParticles);
 	SmartDashboard::PutNumber("Filtered particles", numParticles);
+	double XUpLeftCorner, YUpLeftCorner;
+	imaqMeasureParticle(binaryFrame, ParticleNumber, false, IMAQ_MT_FIRST_PIXEL_X, &XUpLeftCorner);
+	imaqMeasureParticle(binaryFrame, ParticleNumber, false, IMAQ_MT_FIRST_PIXEL_Y, &YUpLeftCorner);
+	SmartDashboard::PutNumber("First Pixel - X", XUpLeftCorner);
+	SmartDashboard::PutNumber("First Pixel - Y", YUpLeftCorner);
+
+	imaqError = imaqDrawShapeOnImage(binaryFrame, binaryFrame, {YUpLeftCorner-25, XUpLeftCorner-25, 50, 50}, DrawMode::IMAQ_DRAW_INVERT, ShapeMode::IMAQ_SHAPE_OVAL, 0.0f);
+
+	CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
+	Wait(2); //Part of test code to cycle between the filtered image and the color image
+	//Replaces the SendtoDashboard function without error handling
+	CameraServer::GetInstance()->SetImage(binaryFrame); //Send masked image to dashboard to assist in tweaking mask.
 
 	/*COMMENT EVERYTHING
 
@@ -191,14 +199,6 @@ void WateryTart::Manual()
 
   }
 /*  COMMENT EVERYTHING
-	void WateryTart::SendToDashboard(Image *image, int error)
-	{
-		if(error < ERR_SUCCESS) {
-			DriverStation::ReportError("Send To Dashboard error: " + std::to_string((long)imaqError) + "\n");
-		} else {
-			CameraServer::GetInstance()->SetImage(binaryFrame);
-		}
-	}
 
 	//Comparator function for sorting particles. Returns true if particle 1 is larger
 	static bool WateryTart::CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)

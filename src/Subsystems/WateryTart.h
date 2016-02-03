@@ -21,7 +21,7 @@ public:
 
 	WateryTart();
 	void InitDefaultCommand();
-	void Search(Range, Range, Range);
+	void Search(Range, Range, Range, int);
 	void Manual();
 	void Stop();
 	void Reset();
