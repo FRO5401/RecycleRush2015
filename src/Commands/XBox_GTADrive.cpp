@@ -27,8 +27,8 @@ void XBox_GTADrive::Initialize()
 void XBox_GTADrive::Execute()
 {
 	double 	Slew       =	oi	->	ReadJoystickX();
-	double 	Throttle 	=	oi	->	GetRightTrigger();
-	double 	Reverse 	=	oi	->	GetLeftTrigger();
+	double Throttle 	=	oi	->	GetRightTrigger();
+	double Reverse 	=	oi	->	GetLeftTrigger();
 	bool 	Precision	=	oi	->	GetPrecision();
 	bool 	Brake		=	oi	->	GetBrake();
 	double Right,Left, Sensitivity;
@@ -54,6 +54,10 @@ void XBox_GTADrive::Execute()
 		Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
 	}
 
+	SmartDashboard::PutNumber("Throttle Value",Throttle);
+	SmartDashboard::PutNumber("Reverse Value",Reverse);
+	SmartDashboard::PutNumber("Slew Value",Slew);
+	SmartDashboard::PutBoolean("Turn",turn);
 
 	drivebase        -> Drive(Left, Right);
 }

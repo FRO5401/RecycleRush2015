@@ -36,6 +36,11 @@ void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes 
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
 	        HDrive	->	Set(0); //GTA Drive does not use H Drive
+
+	        //LiveWindow::GetInstance()->AddActuator("Dank Memes","Left Drive",LeftDrive);
+	        //LiveWindow::GetInstance()->SetEnabled(true); //if uncommented, robot doesn't drive
+	        SmartDashboard::PutData("Left Drive Value",LeftDrive);
+	        SmartDashboard::PutData("Right Drive Value",RightDrive);
 }
 
 void DriveBase::Stop()

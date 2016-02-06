@@ -16,6 +16,7 @@ ToteLift::ToteLift() : Subsystem("ToteLift")
 	ToteLiftLeft 	=	new DoubleSolenoid(SolenoidCAN_ID, ToteLiftChannel_LeftFwd, ToteLiftChannel_LeftRev);
 	ToteLiftRight 	= 	new DoubleSolenoid(SolenoidCAN_ID, ToteLiftChannel_RightFwd, ToteLiftChannel_RightRev);
 	MainCompressor	=	new Compressor();
+	MainCompressor -> Stop();
 }
 void ToteLift::InitDefaultCommand()
 {

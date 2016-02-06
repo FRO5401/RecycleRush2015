@@ -17,6 +17,9 @@
 class XBox_GTADrive: public CommandBase
 {
 public:
+	//double *Throttle;
+	//double *Reverse;
+
 	XBox_GTADrive();
 	void Initialize();
 	void Execute();

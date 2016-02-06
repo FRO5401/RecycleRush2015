@@ -54,6 +54,7 @@ private:
 	void TestPeriodic()
 	{
 		lw->Run();
+		lw->SetEnabled(true);
 	}
 };
 
