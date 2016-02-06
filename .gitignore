@@ -3,3 +3,6 @@
 *.xml
 .settings/language.settings.xml
 sysProps.xml
+.settings/language.settings.xml
+*.xml
+sysProps.xml

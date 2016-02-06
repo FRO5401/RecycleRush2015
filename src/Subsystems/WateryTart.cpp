@@ -28,6 +28,8 @@
 		double BoundingRectBottom;
 	};
 */
+//	ParticleReport abcdef;
+//	DetectorReport *cornerDetectorReport;
 	//Structure to represent the scores for the various tests used for target identification
 	struct Scores {
 		double Area;
@@ -127,13 +129,13 @@ void WateryTart::Search(Range Red, Range Green, Range Blue, int ParticleNumber)
 	SmartDashboard::PutNumber("First Pixel - X", XUpLeftCorner);
 	SmartDashboard::PutNumber("First Pixel - Y", YUpLeftCorner);
 
-	imaqError = imaqDrawShapeOnImage(binaryFrame, binaryFrame, {YUpLeftCorner-25, XUpLeftCorner-25, 50, 50}, DrawMode::IMAQ_DRAW_INVERT, ShapeMode::IMAQ_SHAPE_OVAL, 0.0f);
+//	imaqError = imaqDrawShapeOnImage(binaryFrame, binaryFrame, {YUpLeftCorner-25, XUpLeftCorner-25, 50, 50}, DrawMode::IMAQ_DRAW_INVERT, ShapeMode::IMAQ_SHAPE_OVAL, 0.0f);
 
 	CameraServer::GetInstance()->SetImage(frame);  //Send original image to dashboard to assist in tweaking mask.
 	Wait(2); //Part of test code to cycle between the filtered image and the color image
 	//Replaces the SendtoDashboard function without error handling
 	CameraServer::GetInstance()->SetImage(binaryFrame); //Send masked image to dashboard to assist in tweaking mask.
-
+//	ThisThing = imaqCornerDetection(binaryframe, binaryframe, 0, 0);
 	/*COMMENT EVERYTHING
 
 	if(numParticles > 0) {
