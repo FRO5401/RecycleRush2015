@@ -9,6 +9,7 @@
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/ToteLift.h"
 #include "Subsystems/WateryTart.h"
+#include "Subsystems/OpenCVTargetAq.h"
 
 
 /**
@@ -27,6 +28,7 @@ public:
 	static ToteLift *totelift;
 	static OI *oi;
 	static WateryTart 	*waterytart;
+	static OpenCVTargetAq	*opencvtargetaq;
 
 };
 
