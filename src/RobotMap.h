@@ -29,8 +29,8 @@ const int XBoxController_Channel	=	1;	//Commented out, no channel assigned
 /************************************************************************************
  *2.0 Speed Controller Section
 ************************************************************************************/
-const int MotorLeft 	= 1;
-const int MotorRight 	= 0;
+const int MotorLeft 	= 1;//Formerly 1
+const int MotorRight 	= 0;//Formerly 0
 const int MotorH		= 2;
 /************************************************************************************
  *End Speed Controllers

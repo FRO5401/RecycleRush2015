@@ -1,7 +1,7 @@
 #include <Commands/JoystickMoveSkid.h>
 #include "RobotMap.h"
 #include "SmartDashboard/SmartDashboard.h"
-
+/*
 JoystickMove::JoystickMove()
 {
 	//Declares required subsystems
@@ -47,3 +47,4 @@ void JoystickMove::Interrupted()
 {
 
 }
+*/
