@@ -29,6 +29,7 @@ const double Drive_Sensitivity_Precise	=	0.2;
 
 const int LBumper_ID	=	5;
 const int RBumper_ID	=	6;
+const int XBoxBButton	=	2;
 const int XBoxXButton   =   3;
 
 /************************************************************************************
@@ -77,6 +78,8 @@ const int Enc_Lt_B				= 3;
 //const int RANGE_FINDER_PORT = 1;
 //const int RANGE_FINDER_MODULE = 1;
 
+//Lights (in drivebase)
+const int LightChannel 			= 9;
 
 
 #endif

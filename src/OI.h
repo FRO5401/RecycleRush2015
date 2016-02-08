@@ -45,6 +45,7 @@ public:
 	bool GetPrecision();
 	bool GetBrake();
 	bool GetButtonX();
+	bool GetButtonB();
 
 };
 

@@ -10,6 +10,8 @@
 #include <Commands/XBox_GTADrive.h>
 #include "DriveBase.h"
 #include "../RobotMap.h"
+#include <Relay.h>
+
 //#include "Preferences.h"
 
 DriveBase::DriveBase() :	Subsystem("DriveBase")
@@ -19,6 +21,7 @@ DriveBase::DriveBase() :	Subsystem("DriveBase")
   HDrive		= new Victor(MotorH);
   RightEnc		= new Encoder(Enc_Rt_A,Enc_Rt_B,true,Encoder::k1X);
   LeftEnc		= new Encoder(2,3, true, Encoder::k1X);
+  LightValue	= new Relay(0);
 //  RoboPrefs		= new Preferences;
 }
 void DriveBase::InitDefaultCommand()
@@ -30,17 +33,21 @@ void DriveBase::InitDefaultCommand()
 	SetDefaultCommand(new XBox_GTADrive());
 }
 
-void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes of joystick
+void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired, bool lightsOn) //axes of joystick
 {
 	LeftDriveDesired = -1 * LeftDriveDesired;	//Corrects for reversed motor
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
 	        HDrive	->	Set(0); //GTA Drive does not use H Drive
+	//if (lightsOn)
+	//  LightValue -> Set(0);
+
 
 	        //LiveWindow::GetInstance()->AddActuator("Dank Memes","Left Drive",LeftDrive);
 	        //LiveWindow::GetInstance()->SetEnabled(true); //if uncommented, robot doesn't drive
 	        SmartDashboard::PutData("Left Drive Value",LeftDrive);
 	        SmartDashboard::PutData("Right Drive Value",RightDrive);
+	       // SmartDashboard::PutValue("Lights",Relay::Get());
 }
 
 void DriveBase::Stop()

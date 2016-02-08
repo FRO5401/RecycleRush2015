@@ -32,7 +32,8 @@ void XBox_GTADrive::Execute()
 	bool 	Precision	=	oi	->	GetPrecision();
 	bool 	Brake		=	oi	->	GetBrake();
 	double Right,Left, Sensitivity;
-	bool turn 			= 	oi  -> 	GetButtonX();
+	//bool turn 			= 	oi  -> 	GetButtonX();
+	bool lightsOn		= oi -> GetButtonB();
 
 	if (Precision) { //Sets drive precision based on RobotMap and Precision Mode
 		Sensitivity	=	Drive_Sensitivity_Precise;
@@ -43,9 +44,9 @@ void XBox_GTADrive::Execute()
 	if (Brake) {
 		Right = 0;
 		Left = 0;
-	} else if (turn) {
-		Left = -1 * (Sensitivity * Slew);
-		Right = 1 * (Sensitivity * Slew);
+	//} else if (turn) {
+	//	Left = -1 * (Sensitivity * Slew);
+	//	Right = 1 * (Sensitivity * Slew);
 	} else if (Slew > 0){									//Positive X axis(slew) means right turn
 		Left = (Throttle - Reverse) * (1 - Slew) * Sensitivity;
 		Right = (Throttle-Reverse) * (1) * Sensitivity;
@@ -57,9 +58,11 @@ void XBox_GTADrive::Execute()
 	SmartDashboard::PutNumber("Throttle Value",Throttle);
 	SmartDashboard::PutNumber("Reverse Value",Reverse);
 	SmartDashboard::PutNumber("Slew Value",Slew);
-	SmartDashboard::PutBoolean("Turn",turn);
+	//SmartDashboard::PutBoolean("Turn",turn);
 
-	drivebase        -> Drive(Left, Right);
+	//drivebase ->
+
+	drivebase        -> Drive(Left, Right, lightsOn);
 }
 
 // Make this return true when this Command no longer needs to run execute()

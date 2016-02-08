@@ -179,3 +179,8 @@ bool OI::GetButtonX(){
 	return ButtonReader;
 }
 
+bool OI::GetButtonB(){
+	bool ButtonReader = XBoxController -> GetRawButton(XBoxBButton);
+	return ButtonReader;
+}
+

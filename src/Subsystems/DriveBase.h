@@ -22,10 +22,11 @@ public:
 	Victor *HDrive;
 	Encoder *RightEnc;
 	Encoder *LeftEnc;
+	Relay *LightValue;
 
 	DriveBase();
 	void InitDefaultCommand();
-	void Drive(double, double);
+	void Drive(double, double, bool);
 	void Reset();
 	void Stop();
 };
