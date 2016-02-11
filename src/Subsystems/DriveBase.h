@@ -23,6 +23,10 @@ public:
 	Encoder *RightEnc;
 	Encoder *LeftEnc;
 	Relay *LightValue;
+	//DriverStation* DSforDriveBase;
+
+	//double LeftDriveFinal;
+	//double RightDriveFinal;
 
 	DriveBase();
 	void InitDefaultCommand();

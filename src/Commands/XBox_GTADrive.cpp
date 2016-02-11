@@ -9,11 +9,14 @@
 #include "RobotMap.h"
 #include "SmartDashboard/SmartDashboard.h"
 
+//double plzwork = 0;
+
 XBox_GTADrive::XBox_GTADrive()
 {
 	//Declares required subsystems
 	Requires(drivebase);
-
+	plzwork = 0;
+	plzwork2 = false;
 }
 
 // Called just before this Command runs the first time
@@ -21,6 +24,8 @@ void XBox_GTADrive::Initialize()
 {
 	drivebase	-> Reset();
 //	drivebase->Stop();
+	SmartDashboard::PutNumber("doesthiswork", plzwork);
+	SmartDashboard::PutNumber("yesthisworks", plzwork2);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -60,9 +65,23 @@ void XBox_GTADrive::Execute()
 	SmartDashboard::PutNumber("Slew Value",Slew);
 	//SmartDashboard::PutBoolean("Turn",turn);
 
+	//For testing
+	plzwork = SmartDashboard::GetNumber("doesthiswork", plzwork);
+	if (plzwork != 0)
+		std::cout << "It works! - " << plzwork << std::endl;
+	else
+		std::cout << "You failed!" << std::endl;
+
+	plzwork2 = SmartDashboard::GetNumber("yesthisworks", plzwork2);
+		if (plzwork)
+			std::cout << "Works as well! - " << plzwork2 << std::endl;
+		else
+			std::cout << "You epicly failed!" << std::endl;
+
+
 	//drivebase ->
 
-	drivebase        -> Drive(Left, Right, lightsOn);
+	drivebase        -> Drive(Left, Right, plzwork);
 }
 
 // Make this return true when this Command no longer needs to run execute()

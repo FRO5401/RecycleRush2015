@@ -20,6 +20,9 @@ public:
 	//double *Throttle;
 	//double *Reverse;
 
+	double plzwork;
+	bool plzwork2;
+
 	XBox_GTADrive();
 	void Initialize();
 	void Execute();

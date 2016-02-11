@@ -19,8 +19,8 @@ private:
 		lw = LiveWindow::GetInstance();
 		CameraServer::GetInstance() -> SetQuality(50);
 		CameraServer::GetInstance() -> StartAutomaticCapture("cam0");
-		//frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
-		//CameraServer::GetInstance()->SetImage(frame);
+		frame = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
+		CameraServer::GetInstance()->SetImage(frame);
 		std::cout << "RobotInit" << std::endl;
 	}
 	
@@ -54,7 +54,7 @@ private:
 	void TeleopPeriodic()
 	{
 		Scheduler::GetInstance()->Run();
-		std::cout << "TeleopPeriodic" << std::endl;
+		/*std::cout << "TeleopPeriodic" << std::endl;
 		if (SmartDashboard::GetBoolean("JASON", true))
 				std::cout << "Yes." << std::endl;
 			else
@@ -63,7 +63,7 @@ private:
 		//CameraServer::GetInstance()->SetImage(frame);
 		double dumb = SmartDashboard::GetNumber("Are you dumb?",0.0);
 		//SmartDashboard::PutNumber("Recieved - Are you dumb?", dumb);
-		std::cout << dumb << std::endl;
+		std::cout << dumb << std::endl;*/
 	}
 
 	void TestPeriodic()
