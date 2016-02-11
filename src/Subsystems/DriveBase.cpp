@@ -8,6 +8,7 @@
  *
  */
 #include <Commands/XBox_GTADrive.h>
+#include "Commands/CheckGyro.h"
 #include "DriveBase.h"
 #include "../RobotMap.h"
 //#include "Preferences.h"
@@ -19,7 +20,9 @@ DriveBase::DriveBase() :	Subsystem("DriveBase")
   HDrive		= new Victor(MotorH);
   RightEnc		= new Encoder(Enc_Rt_A,Enc_Rt_B,true,Encoder::k1X);
   LeftEnc		= new Encoder(2,3, true, Encoder::k1X);
+  MainGyro		= new ADXRS450_Gyro();
 //  RoboPrefs		= new Preferences;
+  GyroScalar	= 1;
 }
 void DriveBase::InitDefaultCommand()
 {
@@ -56,12 +59,10 @@ void DriveBase::Reset()
 	HDrive		-> Set(0);
 
 }
-/*
-void DriveBase::PrecisionMode(double LeftDriveDesired, double RightDriveDesired, double HDriveDesired)
+
+float DriveBase::ReportGyro()
 {
-	LeftDrive->Set(LeftDriveDesired * JoyPrecise);
-	RightDrive->Set(LeftDriveDesired * JoyPrecise);
-//	HDrive->Set(HDriveDesired*JoyPrecise);
+	float Angle = (GyroScalar * MainGyro	->	GetAngle());
+	SmartDashboard::PutNumber("Gyro Angle", Angle);
+	return Angle;
 }
-*/
-//}

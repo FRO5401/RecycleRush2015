@@ -5,6 +5,7 @@
 #include "Subsystems/DriveBase.h"
 #include "Subsystems/ToteLift.h"
 #include "Subsystems/OpenCVTargetAq.h"
+#include "Subsystems/RelaySys.h"
 
 // Initialize a single static instance of all of your subsystems to NULL
 DriveBase* CommandBase::drivebase = NULL;
@@ -12,6 +13,7 @@ ToteLift* CommandBase::totelift = NULL;
 OI* CommandBase::oi = NULL;
 WateryTart*	CommandBase::waterytart		= NULL;
 OpenCVTargetAq*	CommandBase::opencvtargetaq	=	NULL;
+RelaySys*	CommandBase::relaysys	=	NULL;
 
 
 CommandBase::CommandBase(char const *name) :
@@ -33,6 +35,7 @@ void CommandBase::init()
 	totelift = new ToteLift();
 	waterytart	= new WateryTart();
 	opencvtargetaq = new OpenCVTargetAq();
+	relaysys = new RelaySys();
 
 	oi = new OI();
 }

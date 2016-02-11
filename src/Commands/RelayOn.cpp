@@ -1,42 +1,40 @@
-#include <Commands/OpenCVLockTarget.h>
-#include <Subsystems/OpenCVTargetAq.h>
+#include "RelayOn.h"
 
-
-
-OpenCVLockTarget::OpenCVLockTarget()
+RelayOn::RelayOn()
 {
 	// Use Requires() here to declare subsystem dependencies
-	Requires(opencvtargetaq);
+	Requires(relaysys);
 }
 
 // Called just before this Command runs the first time
-void OpenCVLockTarget::Initialize()
+void RelayOn::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void OpenCVLockTarget::Execute()
+void RelayOn::Execute()
 {
-//	opencvtargetaq	->	Search();
+	relaysys	->	TurnOn();
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool OpenCVLockTarget::IsFinished()
+bool RelayOn::IsFinished()
 {
-	return false;
+		bool ButtonTwo = oi	-> GetPSButtonTwo();
+		return ButtonTwo;
 }
 
 // Called once after isFinished returns true
-void OpenCVLockTarget::End()
+void RelayOn::End()
 {
-
+	relaysys	->	TurnOff();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void OpenCVLockTarget::Interrupted()
+void RelayOn::Interrupted()
 {
 
 }

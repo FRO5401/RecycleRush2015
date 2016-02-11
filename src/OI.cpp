@@ -5,6 +5,8 @@
 #include "Commands/LiftTote.h" 
 #include "Commands/LowerTote.h" 
 #include "Commands/LockTarget.h"
+#include "Commands/RelayOn.h"
+#include "Commands/CheckGyro.h"
 
 OI::OI()
 {
@@ -93,7 +95,7 @@ OI::OI()
 ********************************/
 
 //	XBoxY		-> WhenPressed(new LiftTote());
-	One		-> WhenPressed(new LockTarget());
+	One		-> WhenPressed(new CheckGyro());
 	XBoxB		-> WhenPressed(new LowerTote());
 	//XBoxRBump   -> WhenPressed();
 

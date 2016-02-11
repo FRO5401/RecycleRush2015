@@ -10,6 +10,7 @@
 #include "Subsystems/ToteLift.h"
 #include "Subsystems/WateryTart.h"
 #include "Subsystems/OpenCVTargetAq.h"
+#include "Subsystems/RelaySys.h"
 
 
 /**
@@ -29,6 +30,7 @@ public:
 	static OI *oi;
 	static WateryTart 	*waterytart;
 	static OpenCVTargetAq	*opencvtargetaq;
+	static RelaySys	*relaysys;
 
 };
 

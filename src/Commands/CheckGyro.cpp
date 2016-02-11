@@ -1,42 +1,39 @@
-#include <Commands/OpenCVLockTarget.h>
-#include <Subsystems/OpenCVTargetAq.h>
+#include "CheckGyro.h"
 
-
-
-OpenCVLockTarget::OpenCVLockTarget()
+CheckGyro::CheckGyro()
 {
 	// Use Requires() here to declare subsystem dependencies
-	Requires(opencvtargetaq);
+	Requires(drivebase);
 }
 
 // Called just before this Command runs the first time
-void OpenCVLockTarget::Initialize()
+void CheckGyro::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void OpenCVLockTarget::Execute()
+void CheckGyro::Execute()
 {
-//	opencvtargetaq	->	Search();
+	drivebase		->ReportGyro();
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool OpenCVLockTarget::IsFinished()
+bool CheckGyro::IsFinished()
 {
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
-void OpenCVLockTarget::End()
+void CheckGyro::End()
 {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void OpenCVLockTarget::Interrupted()
+void CheckGyro::Interrupted()
 {
 
 }

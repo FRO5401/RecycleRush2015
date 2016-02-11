@@ -49,7 +49,6 @@ void XBox_GTADrive::Execute()
 		Left = (Throttle-Reverse) * (1) * Sensitivity;
 		Right = (Throttle-Reverse) * (1 + Slew) * Sensitivity;
 	}
-
 	drivebase        -> Drive(Left, Right);
 }
 
