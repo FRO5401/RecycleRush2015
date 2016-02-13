@@ -12,6 +12,9 @@
 #include "DriveBase.h"
 #include "../RobotMap.h"
 //#include "Preferences.h"
+#include <Timer.h>
+
+Timer *TimeCount = new Timer();
 
 DriveBase::DriveBase() :	Subsystem("DriveBase")
 {
@@ -23,6 +26,7 @@ DriveBase::DriveBase() :	Subsystem("DriveBase")
   MainGyro		= new ADXRS450_Gyro();
 //  RoboPrefs		= new Preferences;
   GyroScalar	= 1;
+  //Timer *TimeCount = new Timer();
 }
 void DriveBase::InitDefaultCommand()
 {
@@ -39,6 +43,11 @@ void DriveBase::Drive(double LeftDriveDesired, double RightDriveDesired) //axes 
 	LeftDrive         -> Set(LeftDriveDesired); //passes desired state to speed controllers
 	        RightDrive         -> Set(RightDriveDesired);
 	        HDrive	->	Set(0); //GTA Drive does not use H Drive
+
+	//gyro and time output to log
+	float gyro = (GyroScalar * MainGyro	->	GetAngle());
+	double Time = TimeCount -> Get();
+	std::cout << gyro << ", " << Time << "\n";
 }
 
 void DriveBase::Stop()
@@ -63,6 +72,6 @@ void DriveBase::Reset()
 float DriveBase::ReportGyro()
 {
 	float Angle = (GyroScalar * MainGyro	->	GetAngle());
-	SmartDashboard::PutNumber("Gyro Angle", Angle);
+	//SmartDashboard::PutNumber("Gyro Angle", Angle); //do this elsewhere
 	return Angle;
 }
